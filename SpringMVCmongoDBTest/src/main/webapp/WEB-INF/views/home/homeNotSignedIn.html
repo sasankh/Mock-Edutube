@@ -33,10 +33,13 @@
 					class="btn btn-success btn-lg">Sign up</a>
 			</p>
 		</div>
-		<button id="evts_button">select node with id 1</button>
-		<div id="player"></div>
-		<em>either click the button or a node in the tree</em>
-		<div id="evts" class="demo"></div>
+		<div id="jstree info" style="float:left;width=30%">
+            <em>either click the button or a node in the tree</em>
+            <br />
+            <button id="evts_button">select node with id 1 (this is here just so we know how to a)</button>
+            <div id="evts" class="demo"></div>
+		</div>
+		<div id="player" width="50%"></div>
 		<div th:replace="fragments/footer :: footer">&copy; 2013 The
 			Static Templates</div>
 	</div>
@@ -58,7 +61,7 @@
 					'core' : {
 						'multiple' : false,
 						'data' : [ {
-							"text" : "Root node",
+							"text" : "figure out how to do a player.getVideoUrl() here!",
 							"children" : [ {
 								"text" : "Child node 1",
 								"id" : 1
