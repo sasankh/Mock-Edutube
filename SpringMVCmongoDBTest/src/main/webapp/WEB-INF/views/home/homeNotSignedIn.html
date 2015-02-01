@@ -55,7 +55,7 @@
 						function(e, data) {
 							if (data.selected.length) {
 								//alert('The selected node is: ' + data.instance.get_node(data.selected[0]).text);
-								player.seekTo(334, true);
+								player.seekTo(parseInt(data.instance.get_node(data.selected[0]).text), true);
 							}
 						}).jstree({
 					'core' : {
@@ -63,10 +63,10 @@
 						'data' : [ {
 							"text" : "figure out how to do a player.getVideoUrl() here!",
 							"children" : [ {
-								"text" : "overview-0",
+								"text" : "0",
 								"id" : 1
 							}, {
-								"text" : "Child node 2"
+								"text" : "334"
 							} ]
 						} ]
 					}
