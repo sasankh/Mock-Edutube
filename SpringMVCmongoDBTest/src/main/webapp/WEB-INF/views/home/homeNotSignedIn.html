@@ -18,6 +18,8 @@
 	th:src="@{/resources/js/bootstrap.min.js}"></script>
 <script src="../../../resources/js/jstree.min.js"
 	th:src="@{/resources/js/jstree.min.js}"></script>
+<script src="../../../resources/js/YoutubeHappy.js"
+	th:src="@{/resources/js/YoutubeHappy.js}"></script>
 </head>
 <body>
 	<div th:replace="fragments/header :: header">Header</div>
@@ -38,8 +40,6 @@
 		<div th:replace="fragments/footer :: footer">&copy; 2013 The
 			Static Templates</div>
 	</div>
-	<script src="../../../resources/js/YoutubeHappy.js"
-		th:src="@{/resources/js/YoutubeHappy.js}"></script>
 	<script>
 		$('#evts_button').on("click", function() {
 			var instance = $('#evts').jstree(true);
@@ -51,8 +51,8 @@
 						"changed.jstree",
 						function(e, data) {
 							if (data.selected.length) {
-								alert('The selected node is: ' + data.instance.get_node(data.selected[0]).text);
-								//player.seekTo(334, true);
+								//alert('The selected node is: ' + data.instance.get_node(data.selected[0]).text);
+								player.seekTo(334, true);
 							}
 						}).jstree({
 					'core' : {
