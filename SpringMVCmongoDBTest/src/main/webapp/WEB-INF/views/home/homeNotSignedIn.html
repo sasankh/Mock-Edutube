@@ -8,8 +8,9 @@
 	media="screen" th:href="@{/resources/css/bootstrap.min.css}" />
 <link href="../../../resources/css/core.css" rel="stylesheet"
 	media="screen" th:href="@{/resources/css/core.css}" />
-<link href="../../../resources/themes/default/style.min.css" rel="stylesheet"
-	media="screen" th:href="@{/resources/themes/default/style.min.css}" />
+<link href="../../../resources/themes/default/style.min.css"
+	rel="stylesheet" media="screen"
+	th:href="@{/resources/themes/default/style.min.css}" />
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="../../../resources/js/bootstrap.min.js"
 	th:src="@{/resources/js/bootstrap.min.js}"></script>
@@ -30,37 +31,43 @@
 					class="btn btn-success btn-lg">Sign up</a>
 			</p>
 		</div>
-		<div th:replace="fragments/footer :: footer">&copy; 2013 The
-			Static Templates</div>
 		<button id="evts_button">select node with id 1</button>
+		<div id="player"></div>
 		<em>either click the button or a node in the tree</em>
 		<div id="evts" class="demo"></div>
+		<div th:replace="fragments/footer :: footer">&copy; 2013 The
+			Static Templates</div>
 	</div>
+	<script src="../../../resources/js/YoutubeHappy.js"
+		th:src="@{/resources/js/YoutubeHappy.js}"></script>
 	<script>
 		$('#evts_button').on("click", function() {
 			var instance = $('#evts').jstree(true);
 			instance.deselect_all();
 			instance.select_node('1');
 		});
-		$('#evts').on("changed.jstree", function(e, data) {
-			if (data.selected.length) {
-				alert('The selected node is: ' + data.instance.get_node(data.selected[0]).text);
-				//player.seekTo(334, true);
-			}
-		}).jstree({
-			'core' : {
-				'multiple' : false,
-				'data' : [ {
-					"text" : "Root node",
-					"children" : [ {
-						"text" : "Child node 1",
-						"id" : 1
-					}, {
-						"text" : "Child node 2"
-					} ]
-				} ]
-			}
-		});
+		$('#evts')
+				.on(
+						"changed.jstree",
+						function(e, data) {
+							if (data.selected.length) {
+								alert('The selected node is: ' + data.instance.get_node(data.selected[0]).text);
+								//player.seekTo(334, true);
+							}
+						}).jstree({
+					'core' : {
+						'multiple' : false,
+						'data' : [ {
+							"text" : "Root node",
+							"children" : [ {
+								"text" : "Child node 1",
+								"id" : 1
+							}, {
+								"text" : "Child node 2"
+							} ]
+						} ]
+					}
+				});
 	</script>
 
 </body>
