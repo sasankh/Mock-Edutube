@@ -36,7 +36,7 @@
 		<div id="jstree info" style="float:left;width=30%" >
             <em>either click the button or a node in the tree</em>
             <br />
-            <button id="evts_button">select node with id 1 (this is here just so we know how to a)</button>
+            <button id="evts_button">select node with id 1 (this is here just for demo purposes)</button>
             <div id="evts" class="demo"></div>
 		</div>
 		<div id="player" width="50%" style="padding:10px"></div>
@@ -44,6 +44,11 @@
 			Static Templates</div>
 	</div>
 	<script>
+		function getLastString(str)
+		{
+	        var arr = str.split("-");
+	        return arr[arr.length-1].trim();
+		}
 		$('#evts_button').on("click", function() {
 			var instance = $('#evts').jstree(true);
 			instance.deselect_all();
@@ -55,7 +60,7 @@
 						function(e, data) {
 							if (data.selected.length) {
 								//alert('The selected node is: ' + data.instance.get_node(data.selected[0]).text);
-								player.seekTo(parseInt(data.instance.get_node(data.selected[0]).text), true);
+								player.seekTo(parseInt(getLastString(data.instance.get_node(data.selected[0]).text)), true);
 							}
 						}).jstree({
 					'core' : {
@@ -63,11 +68,13 @@
 						'data' : [ {
 							"text" : "figure out how to do a player.getVideoUrl() here!",
 							"children" : [ {
-								"text" : "0",
+								"text" : "beggining- 0 ",
 								"id" : 1
 							}, {
-								"text" : "334"
-							} ]
+								"text" : "test1-504"
+							},{"text":"test2-900"} 
+							
+							]
 						} ]
 					}
 				});
