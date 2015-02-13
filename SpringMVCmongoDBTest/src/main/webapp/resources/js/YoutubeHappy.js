@@ -25,6 +25,40 @@ events: {
 // 4. The API will call this function when the video player is ready.
 function onPlayerReady(event) {
 	event.target.playVideo();
+	function getLastString(str)
+	{
+        var arr = str.split("-");
+        return arr[arr.length-1].trim();
+	}
+	$('#evts_button').on("click", function() {
+		var instance = $('#evts').jstree(true);
+		instance.deselect_all();
+		instance.select_node('1');
+	});
+	$('#evts')
+			.on(
+					"changed.jstree",
+					function(e, data) {
+						if (data.selected.length) {
+							//alert('The selected node is: ' + data.instance.get_node(data.selected[0]).text);
+							player.seekTo(parseInt(getLastString(data.instance.get_node(data.selected[0]).text)), true);
+						}
+					}).jstree({
+				'core' : {
+					'multiple' : false,
+					'data' : [ {
+						"text" : player.getVideoData().title,
+						"children" : [ {
+							"text" : "beggining- 0 ",
+							"id" : 1
+						}, {
+							"text" : "test1-504"
+						},{"text":"test2-900"} 
+						
+						]
+					} ]
+				}
+			});
 
 }
 
