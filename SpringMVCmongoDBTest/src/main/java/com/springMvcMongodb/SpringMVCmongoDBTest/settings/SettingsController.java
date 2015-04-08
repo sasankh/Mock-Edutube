@@ -1,4 +1,4 @@
-package com.springMvcMongodb.SpringMVCmongoDBTest.home;
+package com.springMvcMongodb.SpringMVCmongoDBTest.settings;
 
 import java.security.Principal;
 
@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class HomeController {
+public class SettingsController {
 	/*@RequestMapping(value = "/Id/{id}", method = RequestMethod.GET)
 	public String vidById(Model model, @PathVariable String id) {
 		model.addAttribute("vidId", id);
@@ -22,21 +22,9 @@ public class HomeController {
 		return "home/homeNotSignedIn";
 	}*/
 	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/settings", method = RequestMethod.GET)
 	public String index(Principal principal) {
 		
-		return principal != null ? "home/homeSignedIn" : "home/homeNotSignedIn";
-	}
-	
-	@RequestMapping(value = "/about", method = RequestMethod.GET)
-	public String aboutPage(Principal principal) {
-		
-		return "home/about";
-	}
-	
-	@RequestMapping(value = "/contact", method = RequestMethod.GET)
-	public String contactPage(Principal principal) {
-		
-		return "home/contact";
+		return principal != null ? "settings/adminSettings" : "signin/signin";
 	}
 }

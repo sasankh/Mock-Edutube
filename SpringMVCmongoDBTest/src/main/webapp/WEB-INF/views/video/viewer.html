@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>EduTube Player</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="../../../resources/css/bootstrap.min.css" rel="stylesheet"
+	media="screen" th:href="@{/resources/css/bootstrap.min.css}" />
+<link href="../../../resources/css/core.css" rel="stylesheet"
+	media="screen" th:href="@{/resources/css/core.css}" />
+<link href="../../../resources/themes/default/style.min.css"
+	rel="stylesheet" media="screen"
+	th:href="@{/resources/themes/default/style.min.css}" />
+<link href="../../../resources/jquery-ui-1.11.3.custom_peppergrinder/jquery-ui.min.css" rel="stylesheet"
+	media="screen" th:href="@{/resources/jquery-ui-1.11.3.custom_peppergrinder/jquery-ui.min.css}"/>
+<link href="../../../resources/jquery-ui-1.11.3.custom_peppergrinder/jquery-ui.css" rel="stylesheet"
+	media="screen" th:href="@{/resources/jquery-ui-1.11.3.custom_peppergrinder/jquery-ui.css}"/>
+<link href="../../../resources/jquery-ui-1.11.3.custom_peppergrinder/jquery-ui.structure.css" rel="stylesheet"
+	media="screen" th:href="@{/resources/jquery-ui-1.11.3.custom_peppergrinder/jquery-ui.structure.css}"/>
+<link href="../../../resources/jquery-ui-1.11.3.custom_peppergrinder/jquery-ui.structure.min.css" rel="stylesheet"
+	media="screen" th:href="@{/resources/jquery-ui-1.11.3.custom_peppergrinder/jquery-ui.structure.min.css}"/>
+<link href="../../../resources/jquery-ui-1.11.3.custom_peppergrinder/jquery-ui.theme.css" rel="stylesheet"
+	media="screen" th:href="@{/resources/jquery-ui-1.11.3.custom_peppergrinder/jquery-ui.theme.css}"/>
+<link href="../../../resources/jquery-ui-1.11.3.custom_peppergrinder/jquery-ui.theme.min.css" rel="stylesheet"
+	media="screen" th:href="@{/resources/jquery-ui-1.11.3.custom_peppergrinder/jquery-ui.theme.min.css}"/>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="../../../resources/jquery-ui-1.11.3.custom_peppergrinder/jquery-ui.js"></script>
+<script src="../../../resources/jquery-ui-1.11.3.custom_peppergrinder/jquery-ui.min.js"></script>
+<script src="../../../resources/js/bootstrap.min.js"
+	th:src="@{/resources/js/bootstrap.min.js}"></script>
+<script src="../../../resources/js/bootstrap.min.js"
+	th:src="@{/resources/js/bootstrap.min.js}"></script>
+<script src="../../../resources/js/jstree.min.js"
+	th:src="@{/resources/js/jstree.min.js}"></script>
+<script src="../../../resources/js/YoutubeHappy.js"
+	th:src="@{/resources/js/YoutubeHappy.js}"></script>
+</head>
+<body style="background-color:#eceadf; background-image:../../../resources/jquery-ui-1.11.3.custom_peppergrinder/images/ui-bg_fine-grain_15_f7f3de_60x60.png">
+	<div th:replace="fragments/header :: header"></div>
+	<div class="container">
+		<!-- <div class="text-center">
+			<h1>Test</h1>
+			<p class="lead">Welcome to the Spring MVC Quickstart application!
+				Get started quickly by signing up.</p>
+			<p>
+				<a href="/signup" th:href="@{/signup}"
+					class="btn btn-success btn-lg">Sign up</a>
+			</p>
+		</div>-->
+		<div class="row">
+			<div class="col-lg-8 col-xs-12" style="border-color:#d9d6c4; background-color:#eceadf; padding:5px; visibility:visible">
+				<div class="panel panel-default" style="border-color:#d9d6c4; background-color:#eeeeee">
+					<div class="panel-body">
+						<div class="embed-responsive embed-responsive-4by3">
+							<div id="player" style="width:100%" class="embed-responsive-item"></div>
+						</div>
+					</div>
+				</div>
+				<div class="clearfix hidden-lg hidden-md hidden-sm">
+					<div style="margin-left:auto; margin-right:auto; width:70%;">
+						<button id="previous" class="ui-button ui widget ui-state-default ui-corner-all" role="button" style="padding:20px" onclick="player.previousVideo()"><span class="ui-icon ui-icon-seek-first"></span></button>
+						<button id="playPause" class="ui-button ui widget ui-state-default ui-corner-all" role="button" style="padding:20px" onclick="playPause()"><span id="playButton" class="ui-icon ui-icon-pause"></span></button>
+						<button id="next" class="ui-button ui widget ui-state-default ui-corner-all" role="button" style="padding:20px" onclick="player.nextVideo()"><span class="ui-icon ui-icon-seek-end"></span></button>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4" style="padding-top:5px">
+			<div class="panel panel-default" style="border-color:#d9d6c4; background-color:#eeeeee; overflow-y:scroll; height:586px;">
+				<div class="panel-body">
+					<div id="jstree info" style="float:left;width=30%">
+		            	<button id="evts_button">Select a chapter</button>
+		           		<div id="evts" class="demo"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-8 col-xs-12">
+				<div class="panel panel-default" style="border-color:#d9d6c4; background-color:#eceadf; padding:5px;">
+					<div class="panel-heading">${videoTitle}</div>
+					<div class="panel-body">
+						${videoDescription}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<p id="vidId"></p>
+	<div th:replace="fragments/footer :: footer"></div>
+	<script>
+		<!--parse URL to determine which nav button should be tagged as "active"-->
+		var path = window.location.pathname;
+		var vid = path.substr(path.lastIndexOf('/')+1,path.length);
+		//var title = player.getVideoData().title;
+		if(vid == ""){
+			vid = 'M7lc1UVf-VE';
+		}
+		document.getElementById("vidId").innerHTML = vid;
+		document.getElementById("vidId").style.visibility = "hidden";
+		
+		function playPause(){
+			var state = document.getElementById("playPause").innerHTML;
+			
+			if(state == '<span id="playButton" class="ui-icon ui-icon-pause"></span>'){
+				player.pauseVideo();
+				document.getElementById("playPause").innerHTML = '<span id="playButton" class="ui-icon ui-icon-play"></span>'; 
+			} else {
+				player.playVideo();
+				document.getElementById("playPause").innerHTML = '<span id="playButton" class="ui-icon ui-icon-pause"></span>';
+			}
+		}
+	</script>
+
+</body>
+</html>

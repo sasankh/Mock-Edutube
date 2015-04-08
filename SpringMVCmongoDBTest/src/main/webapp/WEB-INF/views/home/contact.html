@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<link href="../../../resources/css/bootstrap.min.css" rel="stylesheet"
+<head>
+    <title th:text="#{view.index.title}">EduTube Contact Info</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+     <link href="../../../resources/css/bootstrap.min.css" rel="stylesheet"
 	media="screen" th:href="@{/resources/css/bootstrap.min.css}" />
 <link href="../../../resources/css/core.css" rel="stylesheet"
 	media="screen" th:href="@{/resources/css/core.css}" />
@@ -22,12 +25,35 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="../../../resources/jquery-ui-1.11.3.custom_peppergrinder/jquery-ui.js"></script>
 <script src="../../../resources/jquery-ui-1.11.3.custom_peppergrinder/jquery-ui.min.js"></script>
+<script src="../../../resources/js/bootstrap.min.js"
+	th:src="@{/resources/js/bootstrap.min.js}"></script>
+<script src="../../../resources/js/bootstrap.min.js"
+	th:src="@{/resources/js/bootstrap.min.js}"></script>
+</head>
 <body>
-    <div th:fragment="alert (type, message)" class="alert alert-dismissable" th:classappend="'alert-' + ${type}"
-    	style="background-color:#b83400; background-image:../../../resources/jquery-ui-1.11.3.custom_peppergrinder/images/ui-bg_fine-grain_68_b83400_60x60.png; border-color:#681818; color:#ffffff">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        <span th:text="${message}">Test</span>
-    </div>
+	<div th:replace="fragments/header :: header">&nbsp;</div>
+	<div class="container">
+	    <!-- /* Handle the flash message */-->
+	    <th:block th:if="${message != null}">
+	        <!-- /* The message code is returned from the @Controller */ -->
+	        <div th:replace="fragments/alert :: alert (type=${#strings.toLowerCase(message.type)}, message=#{${message.message}(${#authentication.name})})">&nbsp;</div>
+	    </th:block>
+	    <div class="panel panel-default" style="border-color:#d9d6c4; background-color:#eceadf">
+			<div class="panel-heading">
+				<div class="text-center">
+					<h2>Contact Informaton</h2>
+				</div>
+			</div>
+			<div class="panel-body">
+				<div class="text-center">
+					<p>The Peter Kiewit Institute<br/>
+						1110 S. 67th Street<br/>
+						Omaha, NE 68182</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:replace="fragments/sitemap :: sitemap"></div>
+	<div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>
-

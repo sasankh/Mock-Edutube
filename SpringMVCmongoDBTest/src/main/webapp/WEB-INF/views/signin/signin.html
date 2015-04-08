@@ -5,8 +5,23 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link href="../../../resources/css/bootstrap.min.css" rel="stylesheet" media="screen" th:href="@{/resources/css/bootstrap.min.css}"/>
     <link href="../../../resources/css/core.css" rel="stylesheet" media="screen" th:href="@{/resources/css/core.css}" />
+<!-- <link href="../../../resources/themes/default/style.min.css"
+	rel="stylesheet" media="screen"
+	th:href="@{/resources/themes/default/style.min.css}" /> -->
+<link href="../../../resources/jquery-ui-1.11.3.custom_peppergrinder/jquery-ui.min.css" rel="stylesheet"
+	media="screen" th:href="@{/resources/jquery-ui-1.11.3.custom_peppergrinder/jquery-ui.min.css}"/>
+<link href="../../../resources/jquery-ui-1.11.3.custom_peppergrinder/jquery-ui.css" rel="stylesheet"
+	media="screen" th:href="@{/resources/jquery-ui-1.11.3.custom_peppergrinder/jquery-ui.css}"/>
+<link href="../../../resources/jquery-ui-1.11.3.custom_peppergrinder/jquery-ui.structure.css" rel="stylesheet"
+	media="screen" th:href="@{/resources/jquery-ui-1.11.3.custom_peppergrinder/jquery-ui.structure.css}"/>
+<link href="../../../resources/jquery-ui-1.11.3.custom_peppergrinder/jquery-ui.structure.min.css" rel="stylesheet"
+	media="screen" th:href="@{/resources/jquery-ui-1.11.3.custom_peppergrinder/jquery-ui.structure.min.css}"/>
+<link href="../../../resources/jquery-ui-1.11.3.custom_peppergrinder/jquery-ui.theme.css" rel="stylesheet"
+	media="screen" th:href="@{/resources/jquery-ui-1.11.3.custom_peppergrinder/jquery-ui.theme.css}"/>
+<link href="../../../resources/jquery-ui-1.11.3.custom_peppergrinder/jquery-ui.theme.min.css" rel="stylesheet"
+	media="screen" th:href="@{/resources/jquery-ui-1.11.3.custom_peppergrinder/jquery-ui.theme.min.css}"/>
 </head>
-<body>
+<body style="background-color:#eceadf; background-image:../../../resources/jquery-ui-1.11.3.custom_peppergrinder/images/ui-bg_fine-grain_15_f7f3de_60x60.png">
 <form class="form-narrow form-horizontal" action="#" method="post" th:action="@{/authenticate}">
     <th:block th:if="${param.error != null}">
         <div th:replace="fragments/alert :: alert (type='danger', message='Sign in error. Please try again.')">Alert</div>
@@ -36,15 +51,17 @@
         </div>
         <div class="form-group">
             <div class="col-lg-offset-2 col-lg-10">
-                <button type="submit" class="btn btn-default">Sign in</button>
+                <button type="submit" class="btn btn-default"><span class="ui-icon ui-icon-clipboard" style="float:left"></span>Sign in</button>
             </div>
         </div>
         <div class="form-group">
             <div class="col-lg-offset-2 col-lg-10">
-                <p>New here? <a href="signup" th:href="@{/signup}">Sign Up</a></p>
+                <p>New to EduTube? <a href="signup" th:href="@{/signup}" style="font-size:larger">Sign Up</a> with an account today!</p>
             </div>
         </div>
     </fieldset>
 </form>
+    <div th:replace="fragments/sitemap :: sitemap"></div>
+	<div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>

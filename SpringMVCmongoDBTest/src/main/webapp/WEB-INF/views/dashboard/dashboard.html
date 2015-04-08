@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>EduTube Dashboard</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="../../../resources/css/bootstrap.min.css" rel="stylesheet"
+	media="screen" th:href="@{/resources/css/bootstrap.min.css}" />
+<link href="../../../resources/css/core.css" rel="stylesheet"
+	media="screen" th:href="@{/resources/css/core.css}" />
+<link href="../../../resources/themes/default/style.min.css"
+	rel="stylesheet" media="screen"
+	th:href="@{/resources/themes/default/style.min.css}" />
+<link href="../../../resources/jquery-ui-1.11.3.custom_peppergrinder/jquery-ui.min.css" rel="stylesheet"
+	media="screen" th:href="@{/resources/jquery-ui-1.11.3.custom_peppergrinder/jquery-ui.min.css}"/>
+<link href="../../../resources/jquery-ui-1.11.3.custom_peppergrinder/jquery-ui.css" rel="stylesheet"
+	media="screen" th:href="@{/resources/jquery-ui-1.11.3.custom_peppergrinder/jquery-ui.css}"/>
+<link href="../../../resources/jquery-ui-1.11.3.custom_peppergrinder/jquery-ui.structure.css" rel="stylesheet"
+	media="screen" th:href="@{/resources/jquery-ui-1.11.3.custom_peppergrinder/jquery-ui.structure.css}"/>
+<link href="../../../resources/jquery-ui-1.11.3.custom_peppergrinder/jquery-ui.structure.min.css" rel="stylesheet"
+	media="screen" th:href="@{/resources/jquery-ui-1.11.3.custom_peppergrinder/jquery-ui.structure.min.css}"/>
+<link href="../../../resources/jquery-ui-1.11.3.custom_peppergrinder/jquery-ui.theme.css" rel="stylesheet"
+	media="screen" th:href="@{/resources/jquery-ui-1.11.3.custom_peppergrinder/jquery-ui.theme.css}"/>
+<link href="../../../resources/jquery-ui-1.11.3.custom_peppergrinder/jquery-ui.theme.min.css" rel="stylesheet"
+	media="screen" th:href="@{/resources/jquery-ui-1.11.3.custom_peppergrinder/jquery-ui.theme.min.css}"/>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="../../../resources/jquery-ui-1.11.3.custom_peppergrinder/jquery-ui.js" th:src="@{/resources/jquery-ui-1.11.3.custom_peppergrinder/jquery-ui.js}"></script>
+<script src="../../../resources/jquery-ui-1.11.3.custom_peppergrinder/jquery-ui.min.js" th:src="@{/resources/jquery-ui-1.11.3.custom_peppergrinder/jquery-ui.min.js}"></script>
+<script src="../../../resources/js/bootstrap.min.js"
+	th:src="@{/resources/js/bootstrap.min.js}"></script>
+<script src="../../../resources/js/bootstrap.min.js"
+	th:src="@{/resources/js/bootstrap.min.js}"></script>
+<script src="../../../resources/js/jstree.min.js"
+	th:src="@{/resources/js/jstree.min.js}"></script>
+<script src="../../../resources/js/YoutubeHappy.js"
+	th:src="@{/resources/js/YoutubeHappy.js}"></script>
+<script>
+	$(function() {
+		$( "#tabs" ).tabs();
+		
+		$( "#shareBox" ).dialog({
+			autoOpen: false,
+			resizable: false,
+			draggable: false,
+			height:250,
+			modal: true,
+			buttons: {
+				"Share Playlist": function(){
+					$(this).dialog("close");
+				},
+				"Cancel": function(){
+					$(this).dialog("close");
+				}
+			}
+			//show: {
+				//effect: "fade",
+				//duration: 200
+			//},
+			//hide: {
+				//effect: "fade",
+				//duration: 200
+			//}
+		});
+		
+		$( "#shareButtonSm" ).click(function(){
+			$( "#shareBoxSm").dialog( "open" );
+		});
+		
+		$( "#shareBoxSm" ).dialog({
+			autoOpen: false,
+			resizable: false,
+			draggable: false,
+			height:250,
+			width:250,
+			modal: true,
+			buttons: {
+				"Share Playlist": function(){
+					$(this).dialog("close");
+				},
+				"Cancel": function(){
+					$(this).dialog("close");
+				}
+			}
+			//show: {
+				//effect: "fade",
+				//duration: 200
+			//},
+			//hide: {
+				//effect: "fade",
+				//duration: 200
+			//}
+		});
+		
+		$( "#shareButton" ).click(function(){
+			$( "#shareBox").dialog( "open" );
+		});
+	});
+</script>
+</head>
+<body style="background-color:#eceadf; background-image:../../../resources/jquery-ui-1.11.3.custom_peppergrinder/images/ui-bg_fine-grain_15_f7f3de_60x60.png">
+	<div th:replace="fragments/header :: header"></div>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 col-xs-12" style="border-color:#d9d6c4; background-color:#eceadf; padding:5px; visibility:visible">
+				<div class="panel panel-default" style="border-color:#d9d6c4; background-color:#eeeeee; height:586px;">
+					<div class="panel-heading">
+						<div class="text-center">
+							<h2>Playlist Dashboard</h2>
+						</div>
+					</div>
+			    	<div class="panel-body">
+			    		<div id="tabs">
+							<ul>
+								<li><a href="#managementTab">Manage Playlists</a></li>
+								<li><a href="#classPlaylistTab">Class Playlists</a></li>
+							</ul>
+							<div id="managementTab">
+								<div class="clearfix hidden-sm hidden-xs">
+									<button id="playlistButton" class="ui-button ui widget ui-state-default ui-corner-all" role="button" style="padding:5px"><span class="ui-icon ui-icon-video" style="float:left; background-image: url(http://download.jqueryui.com/themeroller/images/ui-icons_b83400_256x240.png);"></span>Manage Playlists</button>
+						    		<button id="playButton" class="ui-button ui widget ui-state-default ui-corner-all" role="button" style="padding:5px"><span class="ui-icon ui-icon-play" style="float:left; background-image: url(http://download.jqueryui.com/themeroller/images/ui-icons_b83400_256x240.png);"></span>Play Selected Playlist</button>
+						    		<button id="shareButton" class="ui-button ui widget ui-state-default ui-corner-all" role="button" style="padding:5px"><span class="ui-icon ui-icon-transfer-e-w" style="float:left; background-image: url(http://download.jqueryui.com/themeroller/images/ui-icons_b83400_256x240.png);"></span>Share Selected Playlist</button>
+								</div>
+								<div class="clearfix hidden-lg hidden-md" style="margin-left:auto; margin-right:auto; width:70%;">
+									<button id="playlistButtonSm" class="ui-button ui widget ui-state-default ui-corner-all" role="button" style="padding:20px"><span class="ui-icon ui-icon-video" style="float:left; background-image: url(http://download.jqueryui.com/themeroller/images/ui-icons_b83400_256x240.png);"></span></button>
+									<button id="playButtonSm" class="ui-button ui widget ui-state-default ui-corner-all" role="button" style="padding:20px"><span class="ui-icon ui-icon-play" style="float:left; background-image: url(http://download.jqueryui.com/themeroller/images/ui-icons_b83400_256x240.png);"></span></button>
+									<button id="shareButtonSm" class="ui-button ui widget ui-state-default ui-corner-all" role="button" style="padding:20px"><span class="ui-icon ui-icon-transfer-e-w" style="float:left; background-image: url(http://download.jqueryui.com/themeroller/images/ui-icons_b83400_256x240.png);"></span></button>
+								</div>						
+							</div>
+							<div id="classPlaylistTab">
+								<div class="clearfix hidden-sm hidden-xs">
+									<button id="classButton" class="ui-button ui widget ui-state-default ui-corner-all" role="button" style="padding:5px"><span class="ui-icon ui-icon-play" style="float:left; background-image: url(http://download.jqueryui.com/themeroller/images/ui-icons_b83400_256x240.png);"></span>Play Selected Playlist</button>
+								</div>
+								<div class="clearfix hidden-lg hidden-md" style="margin-left:auto; margin-right:auto; width:70%;">
+									<button id="classButtonSm" class="ui-button ui widget ui-state-default ui-corner-all" role="button" style="padding:20px"><span class="ui-icon ui-icon-play" style="float:left; background-image: url(http://download.jqueryui.com/themeroller/images/ui-icons_b83400_256x240.png);"></span></button>
+								</div>
+							</div>
+						</div>
+						<div class="panel panel-default" style="border-color:#d9d6c4; background-color:#eceadf; padding:5px;">
+							<div class="panel-heading">Playlist Title</div>
+							<div class="panel-body">
+								Playlist Description
+							</div>
+						</div>
+			 		</div>
+				</div>
+				<div id="shareBox" title="Share Selected Playlist">
+					<p>Please enter the user Id you wish to share the playlist with: </p><input/>
+				</div>
+				<div id="shareBoxSm" title="Share Selected Playlist">
+					<p>Please enter the user Id you wish to share the playlist with: </p><input/>
+				</div>
+			</div>
+			<div class="col-lg-4" style="padding-top:5px">
+			<div class="panel panel-default" style="border-color:#d9d6c4; background-color:#eeeeee; overflow-y:scroll; height:586px;">
+				<div class="panel-heading"><div class="text-center"><h3>Playlist Data</h3></div></div>
+				<div class="panel-body">
+					<div id="jstree info" style="float:left;width=30%">
+		            	<button id="evts_button">Select a chapter</button>
+		           		<div id="evts" class="demo"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<p id="vidId"></p>
+	<div th:replace="fragments/footer :: footer"></div>
+	<script>
+
+	</script>
+
+</body>
+</html>
