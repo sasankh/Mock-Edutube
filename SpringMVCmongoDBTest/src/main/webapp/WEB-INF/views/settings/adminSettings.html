@@ -32,21 +32,94 @@
 	th:src="@{/resources/js/bootstrap.min.js}"></script>
 <script>
 	$(function() {
-		$( "#usersBox" ).dialog({
-			autoOpen: false,
-			show: {
-				effect: "fade",
-				duration: 700
-			},
-			hide: {
-				effect: "fade",
-				duration: 700
-			}
-		});
+var userDB, users, userDialog, userForm,
 		
-		$( "#usersButton" ).click(function(){
-			$( "#usersBox").dialog( "open" );
-		});
+		emailRegex = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
+		firstName = $("#firstName"),
+		lastName = $("#lastName"),
+		email = $("#email"),
+		password = $("#password"),
+		classOwner = $("#classOwner"),
+		classes = $("classes"),
+		allFields = $([]).add(lastName).add(firstName).add(email).add(password).add(classOwner).add(classes),
+		tips = $(".validateTips");
+	
+	function updateTips(t){
+		tips
+			.text(t)
+			.addclass("ui-state-highlight");
+		setTimeout(function(){
+			tips.removeClass("ui-state-highlight", 1500);
+		}, 500);
+	}
+	
+	function checkLength( o, n, min, max ) {
+		if ( o.val().length > max || o.val().length < min ) {
+		o.addClass( "ui-state-error" );
+		updateTips( "Length of " + n + " must be between " +
+		min + " and " + max + "." );
+		return false;
+		} else {
+		return true;
+		}
+	}
+	
+	function checkRegexp( o, regexp, n ) {
+		if ( !( regexp.test( o.val() ) ) ) {
+		o.addClass( "ui-state-error" );
+		updateTips( n );
+		return false;
+		} else {
+		return true;
+		}
+	}
+	
+	function addUser() {
+		var valid = true;
+		allFields.removeClass( "ui-state-error" );
+		valid = valid && checkLength( lastName, "Last Name", 3, 16 );
+		valid = valid && checkLength( firstName, "First Name", 3, 16 );
+		valid = valid && checkLength( email, "email", 6, 80 );
+		valid = valid && checkLength( password, "password", 5, 16 );
+		valid = valid && checkRegexp( lastName, /^[a-z]([0-9a-z_\s])+$/i, "Last name may consist of a-z, 0-9, underscores, spaces and must begin with a letter." );
+		valid = valid && checkRegexp( firstName, /^[a-z]([0-9a-z_\s])+$/i, "First name may consist of a-z, 0-9, underscores, spaces and must begin with a letter." );
+		valid = valid && checkRegexp( email, emailRegex, "eg. name@service.com" );
+		valid = valid && checkRegexp( password, /^([0-9a-zA-Z])+$/, "Password field only allow : a-z 0-9" );
+		valid 
+		if ( valid ) {
+			$( "#users tbody" ).append( "<tr>" +
+			"<td>" + name.val() + "</td>" +
+			"<td>" + email.val() + "</td>" +
+			"<td>" + password.val() + "</td>" +
+			"</tr>" );
+			userDialog.dialog( "close" );
+		}
+		return valid;
+	}
+	
+	userDialog = $( "#create-user-form" ).dialog({
+	autoOpen: false,
+	height: 300,
+	width: 350,
+	modal: true,
+	buttons: {
+	"Create User": addUser,
+	Cancel: function() {
+	userDialog.dialog( "close" );
+	}
+	},
+	close: function() {
+	userForm[ 0 ].reset();
+	allFields.removeClass( "ui-state-error" );
+	}
+	});
+	userForm = userDialog.find( "form" ).on( "submit", function( event ) {
+	event.preventDefault();
+	addUser();
+	});
+	$( "#create-user" ).button().on( "click", function() {
+	userDialog.dialog( "open" );
+	});
 		
 		$( "#playlistsBox" ).dialog({
 			autoOpen: false,
@@ -104,9 +177,50 @@
 				</div>		
 	 		</div>
 		</div>
-		<div id="usersBox" title="User Database">
-			<p>This is part of a dialog box</p>
-		</div>
+		<div id="create-user-form" title="Create new user">
+	<p class="validateTips">All fields are required.</p>
+	<form>
+		<fieldset>
+			<label for="lastName">Last Name</label>
+			<input type="text" name="name" id="name" value="Jane Smith" class="text ui-widget-content ui-corner-all">
+			<label for="firstName">First Name</label>
+			<input type="text" name="name" id="name" value="Jane Smith" class="text ui-widget-content ui-corner-all">
+			<label for="email">Email</label>
+			<input type="text" name="email" id="email" value="jane@smith.com" class="text ui-widget-content ui-corner-all">
+			<label for="password">Password</label>
+			<input type="password" name="password" id="password" value="xxxxxxx" class="text ui-widget-content ui-corner-all">
+			<!-- Allow form submission with keyboard without duplicating the dialog button -->
+			<input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+		</fieldset>
+	</form>
+</div>
+
+<div id="usersBox" title="User Database">
+	<button id="create-user">Create new user</button>
+	<h1>Users:</h1>
+	<table id="users" class="ui-widget ui-widget-content">
+	<thead>
+	<tr class="ui-widget-header ">
+	<th>Last Name</th>
+	<th>First Name</th>
+	<th>Email</th>
+	<th>Password</th>
+	<th>Class Owner</th>
+	<th>Classes</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+	<td>Doe</td>
+	<td>John</td>
+	<td>john.doe@example.com</td>
+	<td>johndoe1</td>
+	<td>true</td>
+	<td>testclass</td>
+	</tr>
+	</tbody>
+	</table>
+</div>
 		<div id="playlistsBox" title="Playlist Database">
 			<p>This is part of a dialog box</p>
 		</div>
