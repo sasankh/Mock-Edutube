@@ -16,7 +16,6 @@ public class ViewerController {
 	public void setvideoTitle(String videoTitle) {
 		this.videoTitle = videoTitle;
 	}
-	
 
 	@RequestMapping(value = "/viewer/ID/{id}", method = RequestMethod.GET)
 	public String vidById(Model model, @PathVariable String id) {
@@ -24,7 +23,6 @@ public class ViewerController {
 		
 		return "video/viewer";
 	}
-
 	
 	@RequestMapping(value = "/viewer", method = RequestMethod.GET)
 	public String index(Model model) {
