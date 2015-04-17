@@ -47,7 +47,7 @@ function onPlayerReady(event) {
 						"core" : {
 							"dblclick_toggle" : false,
 							"data" : {
-								"url" : "http://127.0.0.1:8080/spring-mongodb-tutorial/videos/tree?videoID="+document.getElementById('vidId').innerHTML,					
+								"url" : "http://localhost:8080/spring-mongodb-tutorial/videos/tree?videoID="+document.getElementById('vidId').innerHTML,					
 								"data" : function (node) {
 									return { "id" : node.id };
 								}
