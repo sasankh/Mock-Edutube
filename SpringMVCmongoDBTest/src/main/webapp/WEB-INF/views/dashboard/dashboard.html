@@ -3,6 +3,7 @@
 <head>
 <title>EduTube Dashboard</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <link href="../../../resources/css/bootstrap.min.css" rel="stylesheet"
 	media="screen" th:href="@{/resources/css/bootstrap.min.css}" />
 <link href="../../../resources/css/core.css" rel="stylesheet"
@@ -12,27 +13,16 @@
 	th:href="@{/resources/themes/default/style.min.css}" />
 <link href="../../../resources/jquery-ui-1.11.3.custom_peppergrinder/jquery-ui.min.css" rel="stylesheet"
 	media="screen" th:href="@{/resources/jquery-ui-1.11.3.custom_peppergrinder/jquery-ui.min.css}"/>
-<link href="../../../resources/jquery-ui-1.11.3.custom_peppergrinder/jquery-ui.css" rel="stylesheet"
-	media="screen" th:href="@{/resources/jquery-ui-1.11.3.custom_peppergrinder/jquery-ui.css}"/>
-<link href="../../../resources/jquery-ui-1.11.3.custom_peppergrinder/jquery-ui.structure.css" rel="stylesheet"
-	media="screen" th:href="@{/resources/jquery-ui-1.11.3.custom_peppergrinder/jquery-ui.structure.css}"/>
 <link href="../../../resources/jquery-ui-1.11.3.custom_peppergrinder/jquery-ui.structure.min.css" rel="stylesheet"
 	media="screen" th:href="@{/resources/jquery-ui-1.11.3.custom_peppergrinder/jquery-ui.structure.min.css}"/>
-<link href="../../../resources/jquery-ui-1.11.3.custom_peppergrinder/jquery-ui.theme.css" rel="stylesheet"
-	media="screen" th:href="@{/resources/jquery-ui-1.11.3.custom_peppergrinder/jquery-ui.theme.css}"/>
 <link href="../../../resources/jquery-ui-1.11.3.custom_peppergrinder/jquery-ui.theme.min.css" rel="stylesheet"
 	media="screen" th:href="@{/resources/jquery-ui-1.11.3.custom_peppergrinder/jquery-ui.theme.min.css}"/>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
-<script src="../../../resources/jquery-ui-1.11.3.custom_peppergrinder/jquery-ui.js" th:src="@{/resources/jquery-ui-1.11.3.custom_peppergrinder/jquery-ui.js}"></script>
 <script src="../../../resources/jquery-ui-1.11.3.custom_peppergrinder/jquery-ui.min.js" th:src="@{/resources/jquery-ui-1.11.3.custom_peppergrinder/jquery-ui.min.js}"></script>
-<script src="../../../resources/js/bootstrap.min.js"
-	th:src="@{/resources/js/bootstrap.min.js}"></script>
 <script src="../../../resources/js/bootstrap.min.js"
 	th:src="@{/resources/js/bootstrap.min.js}"></script>
 <script src="../../../resources/js/jstree.min.js"
 	th:src="@{/resources/js/jstree.min.js}"></script>
-<script src="../../../resources/js/YoutubeHappy.js"
-	th:src="@{/resources/js/YoutubeHappy.js}"></script>
 <script>
 	$(function() {
 		$( "#tabs" ).tabs();
@@ -61,8 +51,8 @@
 			//}
 		});
 		
-		$( "#shareButtonSm" ).click(function(){
-			$( "#shareBoxSm").dialog( "open" );
+		$( "#shareButton" ).click(function(){
+			$( "#shareBox").dialog( "open" );
 		});
 		
 		$( "#shareBoxSm" ).dialog({
@@ -90,13 +80,17 @@
 			//}
 		});
 		
-		$( "#shareButton" ).click(function(){
-			$( "#shareBox").dialog( "open" );
+		$( "#shareButtonSm" ).click(function(){
+			$( "#shareBoxSm").dialog( "open" );
+		});
+		
+		$( "#playButton" ).click(function(){
+			window.location="viewer";
 		});
 	});
 </script>
 </head>
-<body style="background-color:#eceadf; background-image:../../../resources/jquery-ui-1.11.3.custom_peppergrinder/images/ui-bg_fine-grain_15_f7f3de_60x60.png">
+<body style="background-color:#eceadf; background:../../../resources/jquery-ui-1.11.3.custom_peppergrinder/images/ui-bg_fine-grain_15_f7f3de_60x60.png repeat scroll 50% 50% #FFF;">
 	<div th:replace="fragments/header :: header"></div>
 	<div class="container">
 		<div class="row">
@@ -143,10 +137,10 @@
 			 		</div>
 				</div>
 				<div id="shareBox" title="Share Selected Playlist">
-					<p>Please enter the user Id you wish to share the playlist with: </p><input/>
+					<p>Please enter the user ID you wish to share the playlist with: </p><input/>
 				</div>
 				<div id="shareBoxSm" title="Share Selected Playlist">
-					<p>Please enter the user Id you wish to share the playlist with: </p><input/>
+					<p>Please enter the user ID you wish to share the playlist with: </p><input/>
 				</div>
 			</div>
 			<div class="col-lg-4" style="padding-top:5px">
@@ -165,7 +159,8 @@
 	<p id="vidId"></p>
 	<div th:replace="fragments/footer :: footer"></div>
 	<script>
-
+	var json = '{ "id":1,"text":"Root node","children":[{"id":2,"text":"Child node 1","children":true},{ "id":3,"text":"Child node 2"}]}';
+	var obj = 1;
 	</script>
 
 </body>
