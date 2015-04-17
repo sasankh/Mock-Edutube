@@ -44,21 +44,16 @@ function onPlayerReady(event) {
 							player.seekTo(parseInt(getLastString(data.instance.get_node(data.selected[0]).text)), true);
 						}
 					}).jstree({
-				'core' : {
-					'multiple' : false,
-					'data' : [ {
-						"text" : player.getVideoData().title,
-						"children" : [ {
-							"text" : "beggining- 0 ",
-							"id" : 1
-						}, {
-							"text" : "test1-504"
-						},{"text":"test2-900"} 
-						
-						]
-					} ]
-				}
-			});
+						"core" : {
+							"dblclick_toggle" : false,
+							"data" : {
+								"url" : "http://localhost:8080/spring-mongodb-tutorial/videos/tree?videoID="+document.getElementById('vidId').innerHTML,					
+								"data" : function (node) {
+									return { "id" : node.id };
+								}
+							}
+						}			
+					});
 
 }
 
