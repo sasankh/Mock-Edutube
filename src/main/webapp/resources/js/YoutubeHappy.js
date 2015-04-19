@@ -27,6 +27,7 @@ function onPlayerReady(event) {
     event.target.playVideo();
     document.getElementById("title").innerHTML=player.getVideoData().title;
     document.getElementById("url").innerHTML=player.getVideoUrl();
+    		
     function getLastString(str)
     {
         var arr = str.split("-");
@@ -65,9 +66,14 @@ function onPlayerReady(event) {
 var done = false;
 function onPlayerStateChange(event) {
     if (event.data == YT.PlayerState.PLAYING && !done) {
+    interval=setInterval(function () 
+    		{
+    			document.getElementById("videoTime").innerHTML="elapsed time:  "+Math.floor(player.getCurrentTime())
+    		}, 1000);
         done = true;
     }
 }
 function stopVideo() {
+	window.clearInterval(interval)
     player.stopVideo();
 }
