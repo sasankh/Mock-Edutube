@@ -42,19 +42,19 @@
                 <li><a href="#about" th:href="@{/about}" style="color:#ffffff"><span class="ui-icon ui-icon-info" style="float:left; background-image: url(http://download.jqueryui.com/themeroller/images/ui-icons_ffffff_256x240.png);"></span>About</a></li>
                 <li><a href="#contact" th:href="@{/contact}" style="color:#ffffff"><span class="ui-icon ui-icon-contact" style="float:left; background-image: url(http://download.jqueryui.com/themeroller/images/ui-icons_ffffff_256x240.png);"></span>Contact</a></li>
                 <li th:if="${#authorization.expression('!isAuthenticated()')}">
-                	<a href="#viewer" th:href="@{/dashboard}" style="color:#ffffff"><span class="ui-icon ui-icon-calculator" style="float:left; background-image: url(http://download.jqueryui.com/themeroller/images/ui-icons_ffffff_256x240.png);"></span>Dashboard</a>
+                	<a href="#dashboard" th:href="@{/dashboard}" style="color:#ffffff"><span class="ui-icon ui-icon-calculator" style="float:left; background-image: url(http://download.jqueryui.com/themeroller/images/ui-icons_ffffff_256x240.png);"></span>Dashboard</a>
                 	<!-- <form style="visibility: hidden" id="dashboardForm" method="post" action="#" th:action="@{/dashboard}"></form> -->
                 	</li>
-                <li class="active">
-                	<a href="#dashboard" th:href="@{/viewer/ID/IyCnbyWZkRU}" style="color:#ffffff"><span class="ui-icon ui-icon-calculator" style="float:left; background-image: url(http://download.jqueryui.com/themeroller/images/ui-icons_ffffff_256x240.png);"></span>Viewer</a>
+                <li>
+                	<a href="#viewer" th:href="@{/viewer/ID/IyCnbyWZkRU}" style="color:#ffffff"><span class="ui-icon ui-icon-video" style="float:left; background-image: url(http://download.jqueryui.com/themeroller/images/ui-icons_ffffff_256x240.png);"></span>Viewer</a>
                 	<!-- <form style="visibility: hidden" id="dashboardForm" method="post" action="#" th:action="@{/dashboard}"></form> -->
                 	</li>
-                <li class="active">
+                <li>
                 	<a href="#settings" th:href="@{/settings}" style="color:#ffffff"><span class="ui-icon ui-icon-gear" style="float:left; background-image: url(http://download.jqueryui.com/themeroller/images/ui-icons_ffffff_256x240.png);"></span>Settings</a>
                 	<!-- <form style="visibility: hidden" id="settingsForm" method="post" action="#" th:action="@{/settings}"></form> -->
                 	</li>
             </ul>
-            <!--  
+             
             <ul class="nav navbar-nav navbar-right">
                 <li class="active">
                     <a href="/signin" th:href="@{/signin}" style="color:#ffffff"><span class="ui-icon ui-icon-clipboard" style="float:left; background-image: url(http://download.jqueryui.com/themeroller/images/ui-icons_ffffff_256x240.png);"></span>Sign in</a>
@@ -64,7 +64,7 @@
                     <form style="visibility: hidden" id="form" method="post" action="#" th:action="@{/logout}"></form>
                 </li>
             </ul>
-            -->
+           
         </div>
         <!-- /.nav-collapse -->
     </div>
