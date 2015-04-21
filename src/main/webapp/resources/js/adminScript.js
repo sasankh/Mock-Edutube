@@ -7,7 +7,7 @@ $(function() {
 		email = $("#email"),
 		password = $("#password"),
 		classMod = $("#classMod"),
-		classes = $("classes"),
+		classes = $("#classes"),
 		allFields = $([]).add(lastName).add(firstName).add(email).add(password).add(classMod).add(classes),
 		tips = $(".validateTips");
 	
@@ -41,6 +41,7 @@ $(function() {
 		}
 	}
 	
+	//USERS
 	function addUser() {
 		var valid = true;
 		allFields.removeClass( "ui-state-error" );
@@ -92,8 +93,42 @@ $(function() {
 	$( "#create-user" ).button().on( "click", function() {
 		userDialog.dialog( "open" );
 	});
+	
+	//PLAYLISTS
+	var playlistDB, playlists, playlistDialog, playlistForm,
+	playlistID = $("#playlistID"),
+	playlistTitle = $("#playlistTitle"),
+	ownerEmail = $("#ownerEmail"),
+	timestamps = $("#timestamps"),
+	playlistFields = $([]).add(playlistID).add(playlistTitle).add(ownerEmail).add(timestamps);
+	
+	function deletePlaylist() {
+		var valid = true;
+		allFields.removeClass( "ui-state-error" );
+		valid = valid && checkLength( lastName, "Last Name", 3, 16 );
+		valid = valid && checkLength( firstName, "First Name", 3, 16 );
+		valid = valid && checkLength( email, "email", 6, 80 );
+		valid = valid && checkLength( password, "password", 5, 16 );
+		valid = valid && checkRegexp( lastName, /^[a-z]([0-9a-z_\s])+$/i, "Last name may consist of a-z, 0-9, underscores, spaces and must begin with a letter." );
+		valid = valid && checkRegexp( firstName, /^[a-z]([0-9a-z_\s])+$/i, "First name may consist of a-z, 0-9, underscores, spaces and must begin with a letter." );
+		valid = valid && checkRegexp( email, emailRegex, "eg. name@service.com" );
+		valid = valid && checkRegexp( password, /^([0-9a-zA-Z])+$/, "Password field only allow : a-z 0-9" );
+		valid 
+		if ( valid ) {
+			$( "#users tbody" ).append( "<tr>" +
+			"<td>" + lastName.val() + "</td>" +
+			"<td>" + firstName.val() + "</td>" +
+			"<td>" + email.val() + "</td>" +
+			"<td>" + password.val() + "</td>" +
+			"<td>" + classMod.val() + "</td>" +
+			"<td>" + classes.val() + "</td>" +
+			"</tr>" );
+			userDialog.dialog( "close" );
+		}
+		return valid;
+	}
 		
-	/*$( "#playlistsBox" ).dialog({
+	$( "#delete-playlist" ).dialog({
 		autoOpen: false,
 		show: {
 			effect: "fade",
@@ -103,12 +138,14 @@ $(function() {
 			effect: "fade",
 			duration: 700
 		}
-	});*/
-	
-	$( "#playlistsButton" ).click(function(){
-		$( "#playlistsBox").dialog( "open" );
 	});
 	
+	$( "#playlistsButton" ).click(function(){
+		$( "#delete-playlist").dialog( "open" );
+	});
+	
+	
+	//CLASSES
 	$( "#edit-class" ).dialog({
 		autoOpen: false,
 		show: {
@@ -122,7 +159,7 @@ $(function() {
 	});
 		
 	$( "#classesButton" ).click(function(){
-		$( "#classesBox").dialog( "open" );
+		$( "#edit-class").dialog( "open" );
 	});
 		
 	$( "#tabs" ).tabs({

@@ -54,15 +54,17 @@
 	    	<div class="panel-body">
 		    	<div id="tabs">
 					<ul>
-					<li><a href="#tabs-1">Manage User Database</a></li>
-					<li><a href="#tabs-2">Manage Playlist Database</a></li>
-					<li><a href="#tabs-3">Manage Class Database</a></li>
+						<li><a href="#tabs-1">Manage User Database</a></li>
+						<li><a href="#tabs-2">Manage Playlist Database</a></li>
+						<li><a href="#tabs-3">Manage Class Database</a></li>
 					</ul>
 					<div id="tabs-1">
 						<div id="usersBox" title="User Database">
 							<button id="create-user" class="ui-button ui widget ui-state-default ui-corner-all" role="button" style="padding:20px"><span class="ui-icon ui-icon-person" style="float:left; background-image: url(http://download.jqueryui.com/themeroller/images/ui-icons_b83400_256x240.png);"></span>Create New User</button>
 							<div style="margin-left:auto; margin-right:auto; width:62%;">	
-								<h1>Users:</h1>
+								<div class="text-center">
+									<h1>Users:</h1>
+								</div>
 								<table id="users" class="ui-widget ui-widget-content">
 									<thead>
 										<tr class="ui-widget-header ">
@@ -70,18 +72,58 @@
 											<th>First Name</th>
 											<th>Email</th>
 											<th>Password</th>
-											<th>Class Owner</th>
+											<th>Class Moderator</th>
 											<th>Classes</th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr>
-											<td>Doe</td>
-											<td>John</td>
-											<td>john.doe@example.com</td>
-											<td>johndoe1</td>
+											<td>Church</td>
+											<td>Sam</td>
+											<td>schurch@gmail.com</td>
+											<td>schurch</td>
+											<td>false</td>
+											<td>CSCI-4830</td>
+										</tr>
+										<tr>
+											<td>Garcia</td>
+											<td>J.C.</td>
+											<td>jc@unomaha.edu</td>
+											<td>jfgarcia</td>
+											<td>false</td>
+											<td>CSCI-4830</td>
+										</tr>
+										<tr>
+											<td>Moseman</td>
+											<td>Jesse</td>
+											<td>jmoseman@edutube.com</td>
+											<td>jmoseman</td>
 											<td>true</td>
-											<td>testclass</td>
+											<td>CSCI-4830</td>
+										</tr>
+										<tr>
+											<td>Pike</td>
+											<td>Nathan</td>
+											<td>nate.pike@example.com</td>
+											<td>npike</td>
+											<td>false</td>
+											<td>CSCI-4830</td>
+										</tr>
+										<tr>
+											<td>Viernes</td>
+											<td>John</td>
+											<td>jv@hotmail.com</td>
+											<td>jviernes</td>
+											<td>false</td>
+											<td>CSCI-4830</td>
+										</tr>
+										<tr>
+											<td>Roth</td>
+											<td>Bryan</td>
+											<td>broth@yahoo.com</td>
+											<td>broth</td>
+											<td>false</td>
+											<td>CSCI-4830</td>
 										</tr>
 									</tbody>
 								</table>
@@ -89,13 +131,52 @@
 						</div>
 					</div>
 					<div id="tabs-2">
-						<button id="playlistsButton" class="ui-button ui widget ui-state-default ui-corner-all" role="button" style="padding:20px"><span class="ui-icon ui-icon-script" style="float:left; background-image: url(http://download.jqueryui.com/themeroller/images/ui-icons_b83400_256x240.png);"></span>Manage Playlist Database</button>
+						<div id="playlistsBox" title="Classes Database">
+							<button id="playlistsButton" class="ui-button ui widget ui-state-default ui-corner-all" role="button" style="padding:20px"><span class="ui-icon ui-icon-script" style="float:left; background-image: url(http://download.jqueryui.com/themeroller/images/ui-icons_b83400_256x240.png);"></span>Delete a Playlist</button>
+							<div style="margin-left:auto; margin-right:auto; width:62%;">
+								<div class="text-center">
+									<h1>Playlists:</h1>
+								</div>
+								<table id="playists" class="ui-widget ui-widget-content">
+									<thead>
+										<tr class="ui-widget-header ">
+											<th>Playlist ID</th>
+											<th>Title</th>
+											<th>Creator Email</th>
+											<th># of Timestamps</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>G9SA0Yv-o28</td>
+											<td>Implementing 1NF, 2NF, 3NF</td>
+											<td>schurch@gmail.com</td>
+											<td>6</td>
+										</tr>
+										<tr>
+											<td>kuixY2bCc_0</td>
+											<td>Multiplying matrices</td>
+											<td>jmoseman@edutube.com</td>
+											<td>3</td>
+										</tr>
+										<tr>
+											<td>7UMNz5T-0VQ</td>
+											<td>Introduction To PHP</td>
+											<td>jc@unomaha.edu</td>
+											<td>10</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
 					</div>
 					<div id="tabs-3">
 						<div id="classesBox" title="Classes Database">
-							<button id="classesButton" class="ui-button ui widget ui-state-default ui-corner-all" role="button" style="padding:20px"><span class="ui-icon ui-icon-note" style="float:left; background-image: url(http://download.jqueryui.com/themeroller/images/ui-icons_b83400_256x240.png);"></span>Manage Class Database</button>
+							<button id="classesButton" class="ui-button ui widget ui-state-default ui-corner-all" role="button" style="padding:20px"><span class="ui-icon ui-icon-note" style="float:left; background-image: url(http://download.jqueryui.com/themeroller/images/ui-icons_b83400_256x240.png);"></span>Edit a Class</button>
 							<div style="margin-left:auto; margin-right:auto; width:62%;">
-								<h1>Classes:</h1>
+								<div class="text-center">
+									<h1>Classes:</h1>
+								</div>
 								<table id="classses" class="ui-widget ui-widget-content">
 									<thead>
 										<tr class="ui-widget-header ">
@@ -106,9 +187,9 @@
 									</thead>
 									<tbody>
 										<tr>
-											<td>testclass</td>
-											<td>john.doe@example.com</td>
-											<td style="text-align:center">6</td>
+											<td>CSCI-4830</td>
+											<td>jmoseman@edutube.com</td>
+											<td>6</td>
 										</tr>
 									</tbody>
 								</table>
@@ -120,7 +201,7 @@
 		</div>
 		<div id="create-user-form" title="Create new user">
 			<p class="validateTips">All fields are required.</p>
-			<form>
+			<form id="userCreate">
 				<fieldset>
 					<label for="firstName">First Name</label>
 					<input type="text" name="firstName" id="firstName" value="Jane" class="text ui-widget-content ui-corner-all"/><br/>
@@ -131,7 +212,7 @@
 					<label for="password">Password</label>
 					<input type="password" name="password" id="password" value="xxxxxxx" class="text ui-widget-content ui-corner-all"/><br/>
 					<label for="classMod">Class Moderator</label>
-					<input type="text" name="classOwner" id="classOwner" value="false" class="text ui-widget-content ui-corner-all"/><br/>
+					<input type="text" name="classMod" id="classMod" value="false" class="text ui-widget-content ui-corner-all"/><br/>
 					<label for="classes">Classes</label>
 					<input type="text" name="classes" id="classes" value="N/A" class="text ui-widget-content ui-corner-all"/><br/>
 					<!-- Allow form submission with keyboard without duplicating the dialog button -->
@@ -139,9 +220,15 @@
 				</fieldset>
 			</form>
 		</div>
+		<div id="delete-playlist" title="Delete a Playlist">
+			<form id="playlistDelete">
+				<fieldset>
+				</fieldset>
+			</form>
+		</div>
 		<div id="edit-class" title="Edit Classes">
 			<p class="validateTips">All fields are required.</p>
-			<form>
+			<form id="classEdit">
 				<fieldset>
 					<label for="className">Class Name</label>
 					<input type="text" name="name" id="name" value="Jane" class="text ui-widget-content ui-corner-all"/><br/>
