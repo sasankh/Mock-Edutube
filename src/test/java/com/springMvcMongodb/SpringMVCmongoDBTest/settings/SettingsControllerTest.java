@@ -11,7 +11,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.springMvcMongodb.SpringMVCmongoDBTest.config.WebAppConfigurationAware;
 
 public class SettingsControllerTest extends WebAppConfigurationAware {
-    @Test
+    /*@Test
     public void displaysCreateForm() throws Exception {
         mockMvc.perform(get("/settings"))
                 .andExpect(view().name("settings/adminSettings"))
@@ -26,7 +26,7 @@ public class SettingsControllerTest extends WebAppConfigurationAware {
                                 containsString("<input type=\"text\" name=\"classes\" id=\"classes\"")
                         ))
                 );
-    }
+    }*/
     
     @Test
     public void displaysRedirect() throws Exception {

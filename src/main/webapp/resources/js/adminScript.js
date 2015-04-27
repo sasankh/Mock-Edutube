@@ -52,7 +52,7 @@ $(function() {
 		valid = valid && checkRegexp( lastName, /^[a-z]([0-9a-z_\s])+$/i, "Last name may consist of a-z, 0-9, underscores, spaces and must begin with a letter." );
 		valid = valid && checkRegexp( firstName, /^[a-z]([0-9a-z_\s])+$/i, "First name may consist of a-z, 0-9, underscores, spaces and must begin with a letter." );
 		valid = valid && checkRegexp( email, emailRegex, "eg. name@service.com" );
-		valid = valid && checkRegexp( password, /^([0-9a-zA-Z])+$/, "Password field only allow : a-z 0-9" );
+		valid = valid && checkRegexp( password, /^([0-9a-zA-Z])+$/, "Password field only allows : a-z 0-9" );
 		valid 
 		if ( valid ) {
 			$( "#users tbody" ).append( "<tr>" +
@@ -116,6 +116,7 @@ $(function() {
 		valid 
 		if ( valid ) {
 			$( "#users tbody" ).append( "<tr>" +
+			"<td>" + "<input type=\"radio\" name=\"user\" value=\"" + email.val() + "\"/>" + "</td>" +
 			"<td>" + lastName.val() + "</td>" +
 			"<td>" + firstName.val() + "</td>" +
 			"<td>" + email.val() + "</td>" +
@@ -130,18 +131,37 @@ $(function() {
 		
 	$( "#delete-playlist" ).dialog({
 		autoOpen: false,
-		show: {
-			effect: "fade",
-			duration: 700
-		},
-		hide: {
-			effect: "fade",
-			duration: 700
+		resizable: false,
+		draggable: false,
+		height:250,
+		modal: true,
+		buttons: {
+			"Yes": function(){
+				var row = $("input[name=playlist]:checked").closest('tr');
+				row.remove();
+				$(this).dialog("close");
+			},
+			"No": function(){
+				$(this).dialog("close");
+			}
 		}
 	});
 	
 	$( "#playlistsButton" ).click(function(){
-		$( "#delete-playlist").dialog( "open" );
+		var playlistRow, title, checked;
+		
+		playlistRow = $("input[name=playlist]:checked").closest('tr');
+		title = $(playlistRow).find(".ttl").html();
+		checked = $("input[name=playlist]:checked").val();
+		
+		$("#delpl").replaceWith(title);
+		
+		if(checked != undefined){
+			$( "#delete-playlist").dialog( "open" );
+		} else {
+			//$('#alert').dialog("open");
+		}
+		
 	});
 	
 	

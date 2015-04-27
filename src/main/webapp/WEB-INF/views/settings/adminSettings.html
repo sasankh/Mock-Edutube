@@ -35,7 +35,8 @@
 		td{
 		padding-right: 5px;
 		text-align: center
-		}</style>
+		}
+	</style>
 </head>
 <body style="background-color:#eceadf; background-image:../../../resources/jquery-ui-1.11.3.custom_peppergrinder/images/ui-bg_fine-grain_15_f7f3de_60x60.png">
 	<div th:replace="fragments/header :: header">&nbsp;</div>
@@ -68,6 +69,7 @@
 								<table id="users" class="ui-widget ui-widget-content">
 									<thead>
 										<tr class="ui-widget-header ">
+											<th>&nbsp;</th>
 											<th>Last Name</th>
 											<th>First Name</th>
 											<th>Email</th>
@@ -78,6 +80,7 @@
 									</thead>
 									<tbody>
 										<tr>
+											<td><input type="radio" name="user" value="schurch@gmail.com"/></td>
 											<td>Church</td>
 											<td>Sam</td>
 											<td>schurch@gmail.com</td>
@@ -86,6 +89,7 @@
 											<td>CSCI-4830</td>
 										</tr>
 										<tr>
+											<td><input type="radio" name="user" value="jc@unomaha.edu"/></td>
 											<td>Garcia</td>
 											<td>J.C.</td>
 											<td>jc@unomaha.edu</td>
@@ -94,6 +98,7 @@
 											<td>CSCI-4830</td>
 										</tr>
 										<tr>
+											<td><input type="radio" name="user" value="jmoseman@edutube.com"/></td>
 											<td>Moseman</td>
 											<td>Jesse</td>
 											<td>jmoseman@edutube.com</td>
@@ -102,6 +107,7 @@
 											<td>CSCI-4830</td>
 										</tr>
 										<tr>
+											<td><input type="radio" name="user" value="nate.pike@example.com"/></td>
 											<td>Pike</td>
 											<td>Nathan</td>
 											<td>nate.pike@example.com</td>
@@ -110,6 +116,7 @@
 											<td>CSCI-4830</td>
 										</tr>
 										<tr>
+											<td><input type="radio" name="user" value="jv@hotmail.com"/></td>
 											<td>Viernes</td>
 											<td>John</td>
 											<td>jv@hotmail.com</td>
@@ -118,6 +125,7 @@
 											<td>CSCI-4830</td>
 										</tr>
 										<tr>
+											<td><input type="radio" name="user" value="broth@yahoo.com"/></td>
 											<td>Roth</td>
 											<td>Bryan</td>
 											<td>broth@yahoo.com</td>
@@ -137,9 +145,11 @@
 								<div class="text-center">
 									<h1>Playlists:</h1>
 								</div>
-								<table id="playists" class="ui-widget ui-widget-content">
+								<form id="playlistsDB">
+								<table id="playlists" class="ui-widget ui-widget-content">
 									<thead>
 										<tr class="ui-widget-header ">
+											<th>&nbsp;</th>
 											<th>Playlist ID</th>
 											<th>Title</th>
 											<th>Creator Email</th>
@@ -148,25 +158,36 @@
 									</thead>
 									<tbody>
 										<tr>
+											<td><input type="radio" name="playlist" value="G9SA0Yv-o28"/></td>
 											<td>G9SA0Yv-o28</td>
-											<td>Implementing 1NF, 2NF, 3NF</td>
+											<td class="ttl">Implementing 1NF, 2NF, 3NF</td>
 											<td>schurch@gmail.com</td>
 											<td>6</td>
 										</tr>
 										<tr>
+											<td><input type="radio" name="playlist" value="kuixY2bCc_0"/></td>
 											<td>kuixY2bCc_0</td>
-											<td>Multiplying matrices</td>
+											<td class="ttl">Multiplying matrices</td>
 											<td>jmoseman@edutube.com</td>
 											<td>3</td>
 										</tr>
 										<tr>
+											<td><input type="radio" name="playlist" value="7UMNz5T-0VQ"/></td>
 											<td>7UMNz5T-0VQ</td>
-											<td>Introduction To PHP</td>
+											<td class="ttl">Introduction To PHP</td>
 											<td>jc@unomaha.edu</td>
 											<td>10</td>
 										</tr>
+										<tr>
+											<td><input type="radio" name="playlist" value="IyCnbyWZkRU"/></td>
+											<td>IyCnbyWZkRU</td>
+											<td class="ttl">Using AJAX with jQuery</td>
+											<td>jmoseman@edutube.com</td>
+											<td>5</td>
+										</tr>
 									</tbody>
 								</table>
+								</form>
 							</div>
 						</div>
 					</div>
@@ -180,6 +201,7 @@
 								<table id="classses" class="ui-widget ui-widget-content">
 									<thead>
 										<tr class="ui-widget-header ">
+											<th>&nbsp;</th>
 											<th>Class Name</th>
 											<th>Class Moderator Email</th>
 											<th>Number of Members</th>
@@ -187,6 +209,7 @@
 									</thead>
 									<tbody>
 										<tr>
+											<td><input type="radio" name="playlist" value="CSCI-4830"/></td>
 											<td>CSCI-4830</td>
 											<td>jmoseman@edutube.com</td>
 											<td>6</td>
@@ -221,10 +244,7 @@
 			</form>
 		</div>
 		<div id="delete-playlist" title="Delete a Playlist">
-			<form id="playlistDelete">
-				<fieldset>
-				</fieldset>
-			</form>
+			Are you sure you want to delete "<span id="delpl"></span>"?<br/>
 		</div>
 		<div id="edit-class" title="Edit Classes">
 			<p class="validateTips">All fields are required.</p>
