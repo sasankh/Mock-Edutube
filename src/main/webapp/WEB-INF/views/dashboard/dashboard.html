@@ -23,8 +23,8 @@
 	th:src="@{/resources/js/bootstrap.min.js}"></script>
 <script src="../../../resources/js/jstree.min.js"
 	th:src="@{/resources/js/jstree.min.js}"></script>
-<script src="../../../resources/js/dashboardScript.js"
-	th:src="@{/resources/js/dashboardScript.js}"></script>
+<script src="../../../resources/js/dashboard.js"
+	th:src="@{/resources/js/dashboard.js}"></script>
 	<style>
 		th{
 		padding-right: 10px;
@@ -36,6 +36,13 @@
 		text-align: center
 		}
 	</style>
+	
+	<script type="text/javascript">
+		$(function() {
+			Dashboard.initialize();
+		});
+	</script>
+	
 </head>
 <body style="background-color:#eceadf; background:../../../resources/jquery-ui-1.11.3.custom_peppergrinder/images/ui-bg_fine-grain_15_f7f3de_60x60.png repeat scroll 50% 50% #FFF;">
 	<div th:replace="fragments/header :: header"></div>
@@ -80,19 +87,19 @@
 											</thead>
 											<tbody>
 												<tr>
-													<td><input type="radio" name="userPlaylist" value="G9SA0Yv-o28"/></td>
+													<td><input type="radio" class="user-playlist" name="userPlaylist" value="G9SA0Yv-o28"/></td>
 													<td>G9SA0Yv-o28</td>
 													<td class="ttl">Implementing 1NF, 2NF, 3NF</td>
 													<td>schurch@gmail.com</td>
 												</tr>
 												<tr>
-													<td><input type="radio" name="userPlaylist" value="kuixY2bCc_0"/></td>
+													<td><input type="radio" class="user-playlist" name="userPlaylist" value="kuixY2bCc_0"/></td>
 													<td>kuixY2bCc_0</td>
 													<td class="ttl">Multiplying matrices</td>
 													<td>jmoseman@edutube.com</td>
 												</tr>
 												<tr>
-													<td><input type="radio" name="userPlaylist" value="7UMNz5T-0VQ"/></td>
+													<td><input type="radio" class="user-playlist" name="userPlaylist" value="7UMNz5T-0VQ"/></td>
 													<td>7UMNz5T-0VQ</td>
 													<td class="ttl">Introduction To PHP</td>
 													<td>jc@unomaha.edu</td>
@@ -124,7 +131,7 @@
 											</thead>
 											<tbody>
 												<tr>
-													<td><input type="radio" name="classPlaylist" value="IyCnbyWZkRU"/></td>
+													<td><input type="radio" class="class-playlist" name="classPlaylist" value="IyCnbyWZkRU"/></td>
 													<td>IyCnbyWZkRU</td>
 													<td>Using AJAX with jQuery</td>
 													<td>CSCI-4830</td>
@@ -146,12 +153,10 @@
 				</div>
 			</div>
 			<div class="col-lg-4" style="padding-top:5px">
-			<div class="panel panel-default" style="border-color:#d9d6c4; background-color:#eeeeee; overflow-y:scroll; height:586px;">
-				<div class="panel-heading"><div class="text-center"><h3>Playlist Data</h3></div></div>
-				<div class="panel-body">
-					<div id="jstree info" style="float:left;width=30%">
-		            	<button id="evts_button">&nbsp;</button>
-		           		<div id="evts" class="demo"></div>
+				<div class="panel panel-default" style="border-color:#d9d6c4; background-color:#eeeeee; overflow-y:scroll; height:586px;">
+					<div class="panel-heading"><div class="text-center"><h3>Playlist Data</h3></div></div>
+					<div class="panel-body">
+						<div id="playlist" style="float:left;width=30%">
 						</div>
 					</div>
 				</div>
