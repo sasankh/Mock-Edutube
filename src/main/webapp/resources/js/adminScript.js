@@ -108,28 +108,28 @@ $(function() {
 	
 	function editUser() {
 		var valid = true;
-		var x;
+		var row = $("input[name=user]:checked").closest('tr');
 		EallFields.removeClass( "ui-state-error" );
-		valid = valid && checkLength( ElastName, "Last Name", 3, 16 );
+		/*valid = valid && checkLength( ElastName, "Last Name", 3, 16 );
 		valid = valid && checkLength( EfirstName, "First Name", 3, 16 );
 		valid = valid && checkLength( Eemail, "email", 6, 80 );
 		valid = valid && checkLength( Epassword, "password", 5, 16 );
 		valid = valid && checkRegexp( ElastName, /^[a-z]([0-9a-z_\s])+$/i, "Last name may consist of a-z, 0-9, underscores, spaces and must begin with a letter." );
 		valid = valid && checkRegexp( EfirstName, /^[a-z]([0-9a-z_\s])+$/i, "First name may consist of a-z, 0-9, underscores, spaces and must begin with a letter." );
 		valid = valid && checkRegexp( Eemail, emailRegex, "eg. name@service.com" );
-		valid = valid && checkRegexp( Epassword, /^([0-9a-zA-Z])+$/, "Password field only allows : a-z 0-9" );
-		valid 
+		valid = valid && checkRegexp( Epassword, /^([0-9a-zA-Z])+$/, "Password field only allows : a-z 0-9" );*/
+		valid
 		if ( valid ) {
-			$( "#users tbody" ).append( "<tr>" +
-			"<td>" + "<input type=\"radio\" name=\"user\" value=\"" + email.val() + "\"/>" + "</td>" +
-			"<td class=\"lastname\">" + lastName.val() + "</td>" +
-			"<td class=\"firstname\">" + firstName.val() + "</td>" +
-			"<td class=\"email\">" + email.val() + "</td>" +
-			"<td class=\"password\">" + password.val() + "</td>" +
-			"<td class=\"moderator\">" + classMod.val() + "</td>" +
-			"<td class=\"class\">" + classes.val() + "</td>" +
+			row.replaceWith( "<tr>" +
+			"<td>" + "<input type=\"radio\" name=\"user\" value=\"" + $("#Eemail").val() + "\"/>" + "</td>" +
+			"<td class=\"lastname\">" + $("#ElastName").val() + "</td>" +
+			"<td class=\"firstname\">" + $("#EfirstName").val() + "</td>" +
+			"<td class=\"email\">" + $("#Eemail").val() + "</td>" +
+			"<td class=\"password\">" + $("#Epassword").val() + "</td>" +
+			"<td class=\"moderator\">" + $("#EclassMod").val() + "</td>" +
+			"<td class=\"class\">" + $("#Eclasses").val() + "</td>" +
 			"</tr>" );
-			userDialog.dialog( "close" );
+			editDialog.dialog( "close" );
 		}
 		return valid;
 	}
@@ -200,14 +200,14 @@ $(function() {
 		width: 350,
 		modal: true,
 		buttons: {
-			"Edit User": function(){
-				var row = $("input[name=user]:checked").closest('tr');
-				//row.remove();
-				$(this).dialog("close");
-			},
+			"Edit User": editUser,
 			"Cancel": function(){
 				$(this).dialog("close");
 			}
+		},
+		close: function() {
+			editForm[ 0 ].reset();
+			EallFields.removeClass( "ui-state-error" );
 		}
 	});
 	
@@ -217,13 +217,24 @@ $(function() {
 	});
 	
 	$( "#edit-user" ).click(function(){
-		var userRow, email, checked;
+		var userRow, checked;
 		
 		userRow = $("input[name=user]:checked").closest('tr');
-		email = $(userRow).find(".email").html();
-		checked = $("input[name=user]:checked").val();
+		EfirstName = $(userRow).find(".firstname").html();
+		ElastName = $(userRow).find(".lastname").html();
+		Eemail = $(userRow).find(".email").html();
+		Epassword = $(userRow).find(".password").html();
+		EclassMod = $(userRow).find(".moderator").html();
+		Eclasses = $(userRow).find(".class").html();
 		
-		$("#delusr").replaceWith(email);
+		$("#EfirstName").val(EfirstName);
+		$("#ElastName").val(ElastName);
+		$("#Eemail").val(Eemail);
+		$("#Epassword").val(Epassword);
+		$("#EclassMod").val(EclassMod);
+		$("#Eclasses").val(Eclasses);
+		
+		checked = $("input[name=user]:checked").val();
 		
 		if(checked != undefined){
 			$( "#edit-user-form").dialog( "open" );
