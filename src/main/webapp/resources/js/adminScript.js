@@ -1,7 +1,9 @@
 $(function() {
-	//Manage Users variables
-	var userDB, users, userDialog, userForm,
+	//variables and generic stuff
+	var users, userDialog, userForm, editDialog, editForm,
 		emailRegex = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
+		tips = $(".validateTips"),
+		
 		firstName = $("#firstName"),
 		lastName = $("#lastName"),
 		email = $("#email"),
@@ -9,7 +11,14 @@ $(function() {
 		classMod = $("#classMod"),
 		classes = $("#classes"),
 		allFields = $([]).add(lastName).add(firstName).add(email).add(password).add(classMod).add(classes),
-		tips = $(".validateTips");
+		
+		EfirstName = $("#EfirstName"),
+		ElastName = $("#ElastName"),
+		Eemail = $("#Eemail"),
+		Epassword = $("#Epassword"),
+		EclassMod = $("#EclassMod"),
+		Eclasses = $("#Eclasses"),
+		EallFields = $([]).add(ElastName).add(EfirstName).add(Eemail).add(Epassword).add(EclassMod).add(Eclasses);
 	
 	function updateTips(t){
 		tips
@@ -41,6 +50,34 @@ $(function() {
 		}
 	}
 	
+	$( "#alertUser" ).dialog({
+		autoOpen: false,
+		resizable: false,
+		draggable: false,
+		height:250,
+		width:250,
+		modal: true,
+		buttons: {
+			"Okay": function(){
+				$(this).dialog("close");
+			},
+		}
+	});
+	
+	$( "#alertPlaylist" ).dialog({
+		autoOpen: false,
+		resizable: false,
+		draggable: false,
+		height:250,
+		width:250,
+		modal: true,
+		buttons: {
+			"Okay": function(){
+				$(this).dialog("close");
+			},
+		}
+	});
+	
 	//USERS
 	function addUser() {
 		var valid = true;
@@ -56,12 +93,41 @@ $(function() {
 		valid 
 		if ( valid ) {
 			$( "#users tbody" ).append( "<tr>" +
-			"<td>" + lastName.val() + "</td>" +
-			"<td>" + firstName.val() + "</td>" +
-			"<td>" + email.val() + "</td>" +
-			"<td>" + password.val() + "</td>" +
-			"<td>" + classMod.val() + "</td>" +
-			"<td>" + classes.val() + "</td>" +
+			"<td>" + "<input type=\"radio\" name=\"user\" value=\"" + email.val() + "\"/>" + "</td>" +
+			"<td class=\"lastname\">" + lastName.val() + "</td>" +
+			"<td class=\"firstname\">" + firstName.val() + "</td>" +
+			"<td class=\"email\">" + email.val() + "</td>" +
+			"<td class=\"password\">" + password.val() + "</td>" +
+			"<td class=\"moderator\">" + classMod.val() + "</td>" +
+			"<td class=\"class\">" + classes.val() + "</td>" +
+			"</tr>" );
+			userDialog.dialog( "close" );
+		}
+		return valid;
+	}
+	
+	function editUser() {
+		var valid = true;
+		var x;
+		EallFields.removeClass( "ui-state-error" );
+		valid = valid && checkLength( ElastName, "Last Name", 3, 16 );
+		valid = valid && checkLength( EfirstName, "First Name", 3, 16 );
+		valid = valid && checkLength( Eemail, "email", 6, 80 );
+		valid = valid && checkLength( Epassword, "password", 5, 16 );
+		valid = valid && checkRegexp( ElastName, /^[a-z]([0-9a-z_\s])+$/i, "Last name may consist of a-z, 0-9, underscores, spaces and must begin with a letter." );
+		valid = valid && checkRegexp( EfirstName, /^[a-z]([0-9a-z_\s])+$/i, "First name may consist of a-z, 0-9, underscores, spaces and must begin with a letter." );
+		valid = valid && checkRegexp( Eemail, emailRegex, "eg. name@service.com" );
+		valid = valid && checkRegexp( Epassword, /^([0-9a-zA-Z])+$/, "Password field only allows : a-z 0-9" );
+		valid 
+		if ( valid ) {
+			$( "#users tbody" ).append( "<tr>" +
+			"<td>" + "<input type=\"radio\" name=\"user\" value=\"" + email.val() + "\"/>" + "</td>" +
+			"<td class=\"lastname\">" + lastName.val() + "</td>" +
+			"<td class=\"firstname\">" + firstName.val() + "</td>" +
+			"<td class=\"email\">" + email.val() + "</td>" +
+			"<td class=\"password\">" + password.val() + "</td>" +
+			"<td class=\"moderator\">" + classMod.val() + "</td>" +
+			"<td class=\"class\">" + classes.val() + "</td>" +
 			"</tr>" );
 			userDialog.dialog( "close" );
 		}
@@ -94,6 +160,78 @@ $(function() {
 		userDialog.dialog( "open" );
 	});
 	
+	$( "#delete-user-form" ).dialog({
+		autoOpen: false,
+		resizable: false,
+		draggable: false,
+		height:250,
+		modal: true,
+		buttons: {
+			"Yes": function(){
+				var row = $("input[name=user]:checked").closest('tr');
+				row.remove();
+				$(this).dialog("close");
+			},
+			"No": function(){
+				$(this).dialog("close");
+			}
+		}
+	});
+	
+	$( "#delete-user" ).click(function(){
+		var userRow, email, checked;
+		
+		userRow = $("input[name=user]:checked").closest('tr');
+		email = $(userRow).find(".email").html();
+		checked = $("input[name=user]:checked").val();
+		
+		$("#delusr").replaceWith(email);
+		
+		if(checked != undefined){
+			$( "#delete-user-form").dialog( "open" );
+		} else {
+			$('#alertUser').dialog("open");
+		}
+	});
+	
+	editDialog = $( "#edit-user-form" ).dialog({
+		autoOpen: false,
+		height: 300,
+		width: 350,
+		modal: true,
+		buttons: {
+			"Edit User": function(){
+				var row = $("input[name=user]:checked").closest('tr');
+				//row.remove();
+				$(this).dialog("close");
+			},
+			"Cancel": function(){
+				$(this).dialog("close");
+			}
+		}
+	});
+	
+	editForm = editDialog.find( "form" ).on( "submit", function( event ) {
+		//event.preventDefault();
+		editUser();
+	});
+	
+	$( "#edit-user" ).click(function(){
+		var userRow, email, checked;
+		
+		userRow = $("input[name=user]:checked").closest('tr');
+		email = $(userRow).find(".email").html();
+		checked = $("input[name=user]:checked").val();
+		
+		$("#delusr").replaceWith(email);
+		
+		if(checked != undefined){
+			$( "#edit-user-form").dialog( "open" );
+		} else {
+			$('#alertUser').dialog("open");
+		}
+	});
+	
 	//PLAYLISTS
 	var playlistDB, playlists, playlistDialog, playlistForm,
 	playlistID = $("#playlistID"),
@@ -101,33 +239,6 @@ $(function() {
 	ownerEmail = $("#ownerEmail"),
 	timestamps = $("#timestamps"),
 	playlistFields = $([]).add(playlistID).add(playlistTitle).add(ownerEmail).add(timestamps);
-	
-	function deletePlaylist() {
-		var valid = true;
-		allFields.removeClass( "ui-state-error" );
-		valid = valid && checkLength( lastName, "Last Name", 3, 16 );
-		valid = valid && checkLength( firstName, "First Name", 3, 16 );
-		valid = valid && checkLength( email, "email", 6, 80 );
-		valid = valid && checkLength( password, "password", 5, 16 );
-		valid = valid && checkRegexp( lastName, /^[a-z]([0-9a-z_\s])+$/i, "Last name may consist of a-z, 0-9, underscores, spaces and must begin with a letter." );
-		valid = valid && checkRegexp( firstName, /^[a-z]([0-9a-z_\s])+$/i, "First name may consist of a-z, 0-9, underscores, spaces and must begin with a letter." );
-		valid = valid && checkRegexp( email, emailRegex, "eg. name@service.com" );
-		valid = valid && checkRegexp( password, /^([0-9a-zA-Z])+$/, "Password field only allow : a-z 0-9" );
-		valid 
-		if ( valid ) {
-			$( "#users tbody" ).append( "<tr>" +
-			"<td>" + "<input type=\"radio\" name=\"user\" value=\"" + email.val() + "\"/>" + "</td>" +
-			"<td>" + lastName.val() + "</td>" +
-			"<td>" + firstName.val() + "</td>" +
-			"<td>" + email.val() + "</td>" +
-			"<td>" + password.val() + "</td>" +
-			"<td>" + classMod.val() + "</td>" +
-			"<td>" + classes.val() + "</td>" +
-			"</tr>" );
-			userDialog.dialog( "close" );
-		}
-		return valid;
-	}
 		
 	$( "#delete-playlist" ).dialog({
 		autoOpen: false,
@@ -159,11 +270,9 @@ $(function() {
 		if(checked != undefined){
 			$( "#delete-playlist").dialog( "open" );
 		} else {
-			//$('#alert').dialog("open");
+			$('#alertPlaylist').dialog("open");
 		}
-		
 	});
-	
 	
 	//CLASSES
 	$( "#edit-class" ).dialog({
