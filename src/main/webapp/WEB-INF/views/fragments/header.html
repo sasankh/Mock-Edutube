@@ -49,7 +49,7 @@
                 	<a href="#viewer" th:href="@{/viewer/ID/IyCnbyWZkRU}" style="color:#ffffff"><span class="ui-icon ui-icon-video" style="float:left; background-image: url(http://download.jqueryui.com/themeroller/images/ui-icons_ffffff_256x240.png);"></span>Viewer</a>
                 	<!-- <form style="visibility: hidden" id="dashboardForm" method="post" action="#" th:action="@{/dashboard}"></form> -->
                 </li>
-                <li>
+                <li th:if="${#authorization.expression('isAuthenticated()')}">
                 	<a href="#settings" th:href="@{/settings}" style="color:#ffffff"><span class="ui-icon ui-icon-gear" style="float:left; background-image: url(http://download.jqueryui.com/themeroller/images/ui-icons_ffffff_256x240.png);"></span>Settings</a>
                 	<!-- <form style="visibility: hidden" id="settingsForm" method="post" action="#" th:action="@{/settings}"></form> -->
                 </li>

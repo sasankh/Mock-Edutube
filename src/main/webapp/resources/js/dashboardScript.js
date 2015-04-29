@@ -47,7 +47,7 @@ $(function() {
 			title = $(playlistRow).find(".ttl").html();
 			checked = $("input[name=userPlaylist]:checked").val();
 			
-			$("#sharepl").replaceWith(title);
+			$("#sharepl").replaceWith("<span id=\"sharepl\">" + title + "</span>");
 			
 			if(checked != undefined){
 				$( "#shareBox").dialog( "open" );

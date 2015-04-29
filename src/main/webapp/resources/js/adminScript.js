@@ -185,7 +185,7 @@ $(function() {
 		email = $(userRow).find(".email").html();
 		checked = $("input[name=user]:checked").val();
 		
-		$("#delusr").replaceWith(email);
+		$("#delusr").replaceWith("<span id=\"delusr\">" + email + "</span>");
 		
 		if(checked != undefined){
 			$( "#delete-user-form").dialog( "open" );
@@ -276,7 +276,7 @@ $(function() {
 		title = $(playlistRow).find(".ttl").html();
 		checked = $("input[name=playlist]:checked").val();
 		
-		$("#delpl").replaceWith(title);
+		$("#delpl").replaceWith("<span id=\"delpl\">" + title + "</span>");
 		
 		if(checked != undefined){
 			$( "#delete-playlist").dialog( "open" );
