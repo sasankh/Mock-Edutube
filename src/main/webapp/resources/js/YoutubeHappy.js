@@ -34,28 +34,33 @@ function onPlayerReady(event) {
         return arr[arr.length-1].trim();
     }
     $('#evts_button').on("click", function() {
-        var instance = $('#evts').jstree(true);
-        instance.deselect_all();
-        instance.select_node('1');
+//        var instance = $('#evts').jstree(true);
+//        instance.deselect_all();
+//        instance.select_node('1');
+    	jstreeob=$("#evts").jstree(true).get_json()[0]
+    	updateendpoint="http://localhost:8080/spring-mongodb-tutorial/videos/update/"+document.getElementById('vidId').innerHTML
+    	$.ajax({method:"POST",url:updateendpoint,contentType:"text/plain",data:JSON.stringify(jstreeob)})
     });
     $('#evts')
             .on(
                     "changed.jstree",
                     function(e, data) {
-                        if (data.selected.length) {
+                        if (!(data.event.type=="contextmenu") && data.selected.length) {
                             //alert('The selected node is: ' + data.instance.get_node(data.selected[0]).text);
                             player.seekTo(parseInt(getLastString(data.instance.get_node(data.selected[0]).text)), true);
                         }
                     }).jstree({
                         "core" : {
                             "dblclick_toggle" : false,
+                            "check_callback": true,
                             "data" : {
                                 "url" : "http://localhost:8080/spring-mongodb-tutorial/videos/tree?videoID="+document.getElementById('vidId').innerHTML,                   
                                 "data" : function (node) {
                                     return { "id" : node.id };
                                 }
                             }
-                        }           
+                        },           
+                        "plugins" : [ "contextmenu" , "wholerow" ]
                     });
 
 }
