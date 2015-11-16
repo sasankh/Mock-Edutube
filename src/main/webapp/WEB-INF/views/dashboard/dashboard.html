@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>EduTube Dashboard</title>
+<title>YouVersity Dashboard</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <link href="../../../resources/css/bootstrap.min.css" rel="stylesheet"
@@ -23,73 +23,28 @@
 	th:src="@{/resources/js/bootstrap.min.js}"></script>
 <script src="../../../resources/js/jstree.min.js"
 	th:src="@{/resources/js/jstree.min.js}"></script>
-<script>
-//did it fix?
-	$(function() {
-		$( "#tabs" ).tabs();
+<script src="../../../resources/js/dashboard.js"
+	th:src="@{/resources/js/dashboard.js}"></script>
+<script src="../../../resources/js/dashboardScript.js"
+	th:src="@{/resources/js/dashboardScript.js}"></script>
+	<style>
+		th{
+		padding-right: 10px;
+		text-align: center
+		}
 		
-		$( "#shareBox" ).dialog({
-			autoOpen: false,
-			resizable: false,
-			draggable: false,
-			height:250,
-			modal: true,
-			buttons: {
-				"Share Playlist": function(){
-					$(this).dialog("close");
-				},
-				"Cancel": function(){
-					$(this).dialog("close");
-				}
-			}
-			//show: {
-				//effect: "fade",
-				//duration: 200
-			//},
-			//hide: {
-				//effect: "fade",
-				//duration: 200
-			//}
+		td{
+		padding-right: 5px;
+		text-align: center
+		}
+	</style>
+	
+	<script type="text/javascript">
+		$(function() {
+			Dashboard.initialize();
 		});
-		
-		$( "#shareButton" ).click(function(){
-			$( "#shareBox").dialog( "open" );
-		});
-		
-		$( "#shareBoxSm" ).dialog({
-			autoOpen: false,
-			resizable: false,
-			draggable: false,
-			height:250,
-			width:250,
-			modal: true,
-			buttons: {
-				"Share Playlist": function(){
-					$(this).dialog("close");
-				},
-				"Cancel": function(){
-					$(this).dialog("close");
-				}
-			}
-			//show: {
-				//effect: "fade",
-				//duration: 200
-			//},
-			//hide: {
-				//effect: "fade",
-				//duration: 200
-			//}
-		});
-		
-		$( "#shareButtonSm" ).click(function(){
-			$( "#shareBoxSm").dialog( "open" );
-		});
-		
-		$( "#playButton" ).click(function(){
-			window.location="viewer/ID/IyCnbyWZkRU";
-		});
-	});
-</script>
+	</script>
+	
 </head>
 <body style="background-color:#eceadf; background:../../../resources/jquery-ui-1.11.3.custom_peppergrinder/images/ui-bg_fine-grain_15_f7f3de_60x60.png repeat scroll 50% 50% #FFF;">
 	<div th:replace="fragments/header :: header"></div>
@@ -110,47 +65,100 @@
 							</ul>
 							<div id="managementTab">
 								<div class="clearfix hidden-sm hidden-xs">
-									<button id="playlistButton" class="ui-button ui widget ui-state-default ui-corner-all" role="button" style="padding:5px"><span class="ui-icon ui-icon-video" style="float:left; background-image: url(http://download.jqueryui.com/themeroller/images/ui-icons_b83400_256x240.png);"></span>Manage Playlists</button>
-						    		<button id="playButton" class="ui-button ui widget ui-state-default ui-corner-all" role="button" style="padding:5px"><span class="ui-icon ui-icon-play" style="float:left; background-image: url(http://download.jqueryui.com/themeroller/images/ui-icons_b83400_256x240.png);"></span>Play Selected Playlist</button>
-						    		<button id="shareButton" class="ui-button ui widget ui-state-default ui-corner-all" role="button" style="padding:5px"><span class="ui-icon ui-icon-transfer-e-w" style="float:left; background-image: url(http://download.jqueryui.com/themeroller/images/ui-icons_b83400_256x240.png);"></span>Share Selected Playlist</button>
+									<button id="playlistButton" class="ui-button ui widget ui-state-default ui-corner-all" role="button" style="padding:20px"><span class="ui-icon ui-icon-video" style="float:left; background-image: url(http://download.jqueryui.com/themeroller/images/ui-icons_b83400_256x240.png);"></span>Manage Playlists</button>
+						    		<button id="playButton" class="ui-button ui widget ui-state-default ui-corner-all" role="button" style="padding:20px"><span class="ui-icon ui-icon-play" style="float:left; background-image: url(http://download.jqueryui.com/themeroller/images/ui-icons_b83400_256x240.png);"></span>Play Selected Playlist</button>
+						    		<button id="shareButton" class="ui-button ui widget ui-state-default ui-corner-all" role="button" style="padding:20px"><span class="ui-icon ui-icon-transfer-e-w" style="float:left; background-image: url(http://download.jqueryui.com/themeroller/images/ui-icons_b83400_256x240.png);"></span>Share Selected Playlist</button>
 								</div>
 								<div class="clearfix hidden-lg hidden-md" style="margin-left:auto; margin-right:auto; width:70%;">
 									<button id="playlistButtonSm" class="ui-button ui widget ui-state-default ui-corner-all" role="button" style="padding:20px"><span class="ui-icon ui-icon-video" style="float:left; background-image: url(http://download.jqueryui.com/themeroller/images/ui-icons_b83400_256x240.png);"></span></button>
 									<button id="playButtonSm" class="ui-button ui widget ui-state-default ui-corner-all" role="button" style="padding:20px"><span class="ui-icon ui-icon-play" style="float:left; background-image: url(http://download.jqueryui.com/themeroller/images/ui-icons_b83400_256x240.png);"></span></button>
 									<button id="shareButtonSm" class="ui-button ui widget ui-state-default ui-corner-all" role="button" style="padding:20px"><span class="ui-icon ui-icon-transfer-e-w" style="float:left; background-image: url(http://download.jqueryui.com/themeroller/images/ui-icons_b83400_256x240.png);"></span></button>
-								</div>						
+								</div>
+								<br/>
+								<br/>
+								<div style="margin-left:auto; margin-right:auto; width:62%;">
+									<form id="selectUserPlaylist">
+										<table id="userPlayists" class="ui-widget ui-widget-content">
+											<thead>
+												<tr class="ui-widget-header ">
+													<th></th>
+													<th>Playlist ID</th>
+													<th>Title</th>
+													<th>Creator Email</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td><input type="radio" class="user-playlist" name="userPlaylist" value="G9SA0Yv-o28"/></td>
+													<td>G9SA0Yv-o28</td>
+													<td class="ttl">Implementing 1NF, 2NF, 3NF</td>
+													<td>schurch@unomaha.edu</td>
+												</tr>
+												<tr>
+													<td><input type="radio" class="user-playlist" name="userPlaylist" value="kuixY2bCc_0"/></td>
+													<td>kuixY2bCc_0</td>
+													<td class="ttl">Multiplying matrices</td>
+													<td>jmoseman@unomaha.edu</td>
+												</tr>
+												<tr>
+													<td><input type="radio" class="user-playlist" name="userPlaylist" value="7UMNz5T-0VQ"/></td>
+													<td>7UMNz5T-0VQ</td>
+													<td class="ttl">Introduction To PHP</td>
+													<td>jfgarcia@unomaha.edu</td>
+												</tr>
+											</tbody>
+										</table>	
+									</form>
+								</div>					
 							</div>
 							<div id="classPlaylistTab">
-								<div class="clearfix hidden-sm hidden-xs">
-									<button id="classButton" class="ui-button ui widget ui-state-default ui-corner-all" role="button" style="padding:5px"><span class="ui-icon ui-icon-play" style="float:left; background-image: url(http://download.jqueryui.com/themeroller/images/ui-icons_b83400_256x240.png);"></span>Play Selected Playlist</button>
+								<div class="clearfix hidden-sm hidden-xs" style="margin-left:auto; margin-right:auto; width:62%;">
+									<button id="classButton" class="ui-button ui widget ui-state-default ui-corner-all" role="button" style="padding:20px"><span class="ui-icon ui-icon-play" style="float:left; background-image: url(http://download.jqueryui.com/themeroller/images/ui-icons_b83400_256x240.png);"></span>Play Selected Playlist</button>
 								</div>
 								<div class="clearfix hidden-lg hidden-md" style="margin-left:auto; margin-right:auto; width:70%;">
 									<button id="classButtonSm" class="ui-button ui widget ui-state-default ui-corner-all" role="button" style="padding:20px"><span class="ui-icon ui-icon-play" style="float:left; background-image: url(http://download.jqueryui.com/themeroller/images/ui-icons_b83400_256x240.png);"></span></button>
 								</div>
-							</div>
-						</div>
-						<div class="panel panel-default" style="border-color:#d9d6c4; background-color:#eceadf; padding:5px;">
-							<div class="panel-heading">Playlist Title</div>
-							<div class="panel-body">
-								Playlist Description
+								<br/>
+								<br/>
+								<div style="margin-left:auto; margin-right:auto; width:62%;">
+									<form id="selectClassPlaylist">
+										<table id="classPlayists" class="ui-widget ui-widget-content">
+											<thead>
+												<tr class="ui-widget-header ">
+													<th>&nbsp;</th>
+													<th>Playlist ID</th>
+													<th>Title</th>
+													<th>Class</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td><input type="radio" class="class-playlist" name="classPlaylist" value="IyCnbyWZkRU"/></td>
+													<td>IyCnbyWZkRU</td>
+													<td>Using AJAX with jQuery</td>
+													<td>CSCI-4830</td>
+												</tr>
+											</tbody>
+										</table>
+									</form>
+								</div>
 							</div>
 						</div>
 			 		</div>
 				</div>
 				<div id="shareBox" title="Share Selected Playlist">
-					<p>Please enter the user ID you wish to share the playlist with: </p><input/>
+					Please enter the user e-mail you wish to share "<span id="sharepl"></span>" with: <br/>
+					<input type="text"/>
 				</div>
-				<div id="shareBoxSm" title="Share Selected Playlist">
-					<p>Please enter the user ID you wish to share the playlist with: </p><input/>
+				<div id="alert" title="Select a Playlist">
+					Please select a playlist first.
 				</div>
 			</div>
 			<div class="col-lg-4" style="padding-top:5px">
-			<div class="panel panel-default" style="border-color:#d9d6c4; background-color:#eeeeee; overflow-y:scroll; height:586px;">
-				<div class="panel-heading"><div class="text-center"><h3>Playlist Data</h3></div></div>
-				<div class="panel-body">
-					<div id="jstree info" style="float:left;width=30%">
-		            	<button id="evts_button">Select a chapter</button>
-		           		<div id="evts" class="demo"></div>
+				<div class="panel panel-default" style="border-color:#d9d6c4; background-color:#eeeeee; overflow-y:scroll; height:586px;">
+					<div class="panel-heading"><div class="text-center"><h3>Playlist Info</h3></div></div>
+					<div class="panel-body">
+						<div id="playlist" style="float:left;width=30%">
 						</div>
 					</div>
 				</div>
@@ -159,10 +167,5 @@
 	</div>
 	<p id="vidId"></p>
 	<div th:replace="fragments/footer :: footer"></div>
-	<script>
-	var json = '{ "id":1,"text":"Root node","children":[{"id":2,"text":"Child node 1","children":true},{ "id":3,"text":"Child node 2"}]}';
-	var obj = 1;
-	</script>
-
 </body>
 </html>
