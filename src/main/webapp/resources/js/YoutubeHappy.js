@@ -45,7 +45,7 @@ function onPlayerReady(event) {
             .on(
                     "changed.jstree",
                     function(e, data) {
-                        if (!(data.event.type=="contextmenu") && data.selected.length) {
+                        if (!(typeof data.event!=='undefined' && data.event.type=="contextmenu") && data.selected.length) {
                             //alert('The selected node is: ' + data.instance.get_node(data.selected[0]).text);
                             player.seekTo(parseInt(getLastString(data.instance.get_node(data.selected[0]).text)), true);
                         }
