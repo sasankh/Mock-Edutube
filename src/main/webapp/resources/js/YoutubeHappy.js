@@ -39,6 +39,7 @@ function onPlayerReady(event) {
 //        instance.select_node('1');
     	jstreeob=$("#evts").jstree(true).get_json()[0]
     	updateendpoint="http://localhost:8080/spring-mongodb-tutorial/videos/update/"+document.getElementById('vidId').innerHTML
+//    	updateendpoint="http://104.131.53.50/:8080/spring-mongodb-tutorial/videos/update/"+document.getElementById('vidId').innerHTML
     	$.ajax({method:"POST",url:updateendpoint,contentType:"text/plain",data:JSON.stringify(jstreeob)})
     });
     $('#evts')
@@ -51,16 +52,21 @@ function onPlayerReady(event) {
                         }
                     }).jstree({
                         "core" : {
+                        	"themes":
+                        	{
+                        		"icons":false
+                        	},
                             "dblclick_toggle" : false,
                             "check_callback": true,
                             "data" : {
                                 "url" : "http://localhost:8080/spring-mongodb-tutorial/videos/tree?videoID="+document.getElementById('vidId').innerHTML,                   
+//                                "url" : "http://104.131.53.50:8080/spring-mongodb-tutorial/videos/tree?videoID="+document.getElementById('vidId').innerHTML,                   
                                 "data" : function (node) {
                                     return { "id" : node.id };
                                 }
                             }
                         },           
-                        "plugins" : [ "contextmenu" , "wholerow" ]
+                        "plugins" : [ "contextmenu" , "wholerow", "dnd" ]
                     });
 
 }

@@ -1,5 +1,6 @@
 var Dashboard = function () {
 	var videoApi = "http://localhost:8080/spring-mongodb-tutorial/videos/";
+//	var videoApi = "http://104.131.53.50/:8080/spring-mongodb-tutorial/videos/";
 	
 	function initialize() {		
 		$(".user-playlist, .class-playlist").on("change", function(event) {
