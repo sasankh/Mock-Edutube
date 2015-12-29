@@ -66,7 +66,7 @@ function onPlayerReady(event) {
                                 }
                             }
                         },           
-                        "plugins" : [ "contextmenu" , "wholerow", "dnd" ]
+                        "plugins" : [ "contextmenu" , "dnd"] //"wholerow", "dnd" ]
                     });
 
 }
