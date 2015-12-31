@@ -48,7 +48,23 @@ function onPlayerReady(event) {
                     function(e, data) {
                         if (!(typeof data.event!=='undefined' && data.event.type=="contextmenu") && data.selected.length) {
                             //alert('The selected node is: ' + data.instance.get_node(data.selected[0]).text);
-                            player.seekTo(parseInt(getLastString(data.instance.get_node(data.selected[0]).text)), true);
+                        	var lastString = getLastString(data.instance.get_node(data.selected[0]).text);
+                            var a = lastString.split(':');
+                            var seconds; 
+                            if(a.length == 1)
+                            	{
+                            		seconds = (+a[0]);
+                            	}
+                            if(a.length == 2)
+                            	{
+                            		seconds = (+a[0]) * 60 + (+a[1]);
+                            	}
+                            if(a.length == 3)
+                            	{
+                            		seconds = (+a[0]) * 60 * 60 + (+a[1]) * 60 + (+a[2]);
+                            	}
+                            
+                            player.seekTo(seconds, true);
                         }
                     }).jstree({
                         "core" : {
@@ -79,7 +95,7 @@ function onPlayerStateChange(event) {
     if (event.data == YT.PlayerState.PLAYING && !done) {
     interval=setInterval(function () 
     		{
-    			document.getElementById("videoTime").innerHTML="elapsed time:  "+Math.floor(player.getCurrentTime())
+    			document.getElementById("videoTime").innerHTML="elapsed time:  "+Math.floor(player.getCurrentTime()).toString().toHHMMSS();
     		}, 1000);
         done = true;
     }
@@ -87,4 +103,17 @@ function onPlayerStateChange(event) {
 function stopVideo() {
 	window.clearInterval(interval)
     player.stopVideo();
+}
+
+String.prototype.toHHMMSS = function () {
+    var sec_num = parseInt(this, 10); // don't forget the second param
+    var hours   = Math.floor(sec_num / 3600);
+    var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+    var seconds = sec_num - (hours * 3600) - (minutes * 60);
+
+    if (hours   < 10) {hours   = "0"+hours;}
+    if (minutes < 10) {minutes = "0"+minutes;}
+    if (seconds < 10) {seconds = "0"+seconds;}
+    var time    = hours+':'+minutes+':'+seconds;
+    return time;
 }
