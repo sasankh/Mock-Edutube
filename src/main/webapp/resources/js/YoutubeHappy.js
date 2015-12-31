@@ -27,7 +27,7 @@ function onPlayerReady(event) {
     event.target.playVideo();
     document.getElementById("title").innerHTML=player.getVideoData().title;
     document.getElementById("url").innerHTML=player.getVideoUrl();
-    		
+	
     function getLastString(str)
     {
         var arr = str.split("-");
@@ -84,6 +84,11 @@ function onPlayerReady(event) {
                         },           
                         "plugins" : [ "contextmenu" , "dnd"] //"wholerow", "dnd" ]
                     });
+    $('#evts').bind('loaded.jstree',function(e,data)
+    {
+    	$(".jstree-anchor:contains('Root node')").text(player.getVideoData().title);
+    });
+    	
 
 }
 
