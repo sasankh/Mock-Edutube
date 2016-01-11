@@ -19,6 +19,7 @@ $( document ).ready(function() {
        if(key==13)
        {
     	   window.location.href = "http://localhost:8080/SpringMVCmongoDBTest/viewer/ID/" + YouTubeGetID($("#youtubeUrl").val());
+//    	   window.location.href = "http://45.55.199.244:8080/SpringMVCmongoDBTest-0.0.1-SNAPSHOT/viewer/ID/" + YouTubeGetID($("#youtubeUrl").val());
        }
 
     });
