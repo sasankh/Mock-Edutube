@@ -87,7 +87,7 @@ function onPlayerReady(event) {
     $('#evts').bind('loaded.jstree',function(e,data)
     {
 //    	$(".jstree-anchor:contains('Root node')").text(player.getVideoData().title);
-    	tree=$('#evts').jstree(true);
+    	var tree=$('#evts').jstree(true);
     	tree.rename_node(tree.get_node('1_anchor'),player.getVideoData().title);
     });
     	
